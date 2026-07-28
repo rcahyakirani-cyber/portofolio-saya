@@ -50,7 +50,7 @@ export default function Home() {
       <View style={styles.card}>
         <Text style={styles.cardTitle}>Tentang Saya</Text>
         <Text style={styles.cardText}>
-          Halo! Saya seorang developer yang tertarik dengan pengembangan aplikasi mobile dan web menggunakan Expo, React Native, dan teknologi modern lainnya.
+          Halo! Saya seorang developer yang tertarik dengan pengembangan aplikasi dan desain UI/UX seperti figma,javascript,css, dan kotlin.
         </Text>
       </View>
 
@@ -58,13 +58,11 @@ export default function Home() {
       <View style={styles.card}>
         <Text style={styles.cardTitle}>Keahlian & Teknologi</Text>
         <View style={styles.skillContainer}>
-          <Text style={styles.badge}>React Native</Text>
-          <Text style={styles.badge}>Expo Router</Text>
-          <Text style={styles.badge}>TypeScript</Text>
+          <Text style={styles.badge}>Figma</Text>
+          <Text style={styles.badge}>css</Text>
+          <Text style={styles.badge}>kotlin</Text>
           <Text style={styles.badge}>JavaScript</Text>
-          <Text style={styles.badge}>HTML/CSS</Text>
-          <Text style={styles.badge}>Git / GitHub</Text>
-        </View>
+          </View>
       </View>
 
       {/* Proyek Saya */}
