@@ -1,39 +1,46 @@
-import { Image, Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ImageSourcePropType, Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-// =========================================================================
-// 📸 LOKASI FOTO GAMBAR PROYEK KAMU
-// 1. Ambil 3 foto proyek dari laptop kamu (File Explorer).
-// 2. Paste ke folder 'assets' di VS Code.
-// 3. Pastikan namanya 'proyek1.png', 'proyek2.png', dan 'proyek3.png'.
-// =========================================================================
-const gambarProyek1 = require('../../assets/proyek1.png'); // <-- Foto Proyek 1
-const gambarProyek2 = require('../../assets/proyek2.png'); // <-- Foto Proyek 2
-const gambarProyek3 = require('../../assets/proyek3.png'); // <-- Foto Proyek 3
+// Import foto lokal
+const gambarProyek1 = require('../../assets/proyek1.png');
+const gambarProyek2 = require('../../assets/proyek2.png');
+const gambarProyek3 = require('../../assets/proyek3.png');
+
+// Tipe data khusus TypeScript untuk daftar proyek
+interface Project {
+  id: number;
+  title: string;
+  description: string;
+  image: ImageSourcePropType;
+  link: string;
+}
 
 export default function Home() {
   const openLink = (url: string) => {
     Linking.openURL(url);
   };
 
-  // DATA 3 PROYEK KAMU (Silakan ubah judul, deskripsi, dan link-nya di sini)
-  const projects = [
+  // Data 3 Proyek
+  const projects: Project[] = [
     {
       id: 1,
-      title: 'Instagram', 
-      description: 'Membuat instagram menggunakan figma', 
+      title: 'instagram',
+      description: 'membuat desaign instagram menggunakan figma',
       image: gambarProyek1,
+      link: 'https://github.com/rcahyakirani-cyber',
     },
     {
       id: 2,
-      title: 'ReWear', 
-      description: 'membuat aplikasi toko thrifting baju menggunakan java kotlin', 
+      title: 'ReWear',
+      description: 'membuat aplikasi thrifting online menggunakan java kotlin',
       image: gambarProyek2,
+      link: 'https://github.com/rcahyakirani-cyber',
     },
     {
       id: 3,
-      title: 'Flappy Bird', 
-      description: 'Membuat game flappy bird menggunakan java', 
+      title: 'flappy bird',
+      description: 'membuat game flappy bird menggunakan javascript',
       image: gambarProyek3,
+      link: 'https://github.com/rcahyakirani-cyber',
     },
   ];
 
@@ -70,14 +77,13 @@ export default function Home() {
         </View>
       </View>
 
-      {/* Bagian Proyek Saya (3 Proyek) */}
+      {/* Proyek Saya */}
       <View style={styles.sectionHeader}>
         <Text style={styles.sectionTitle}>🚀 Proyek Saya</Text>
       </View>
 
       {projects.map((item) => (
         <View key={item.id} style={styles.projectCard}>
-          {/* Menampilkan Gambar Proyek */}
           <Image source={item.image} style={styles.projectImage} resizeMode="cover" />
           
           <View style={styles.projectBody}>
@@ -94,7 +100,7 @@ export default function Home() {
         </View>
       ))}
 
-      {/* Sosial Media (GitHub) */}
+      {/* Sosial Media */}
       <View style={styles.card}>
         <Text style={styles.cardTitle}>Kontak & Sosial Media</Text>
         <TouchableOpacity 
