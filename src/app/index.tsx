@@ -1,98 +1,146 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Image, Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
+export default function Home() {
+  const openLink = (url: string) => {
+    Linking.openURL(url);
+  };
 
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
   return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
-  );
-}
+    <ScrollView style={styles.container} contentContainerStyle={styles.content}>
+      {/* Header Profile */}
+      <View style={styles.header}>
+        <Image 
+          source={{ uri: 'https://github.com/rcahyakirani-cyber.png' }} 
+          style={styles.avatar} 
+        />
+        <Text style={styles.name}>Raisyah Cahya Kirani</Text>
+        <Text style={styles.title}>Frontend Developer & Mobile Explorer</Text>
+      </View>
 
-export default function HomeScreen() {
-  return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
+      {/* About Me */}
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>Tentang Saya</Text>
+        <Text style={styles.cardText}>
+          Halo! Saya seorang developer yang tertarik dengan pengembangan aplikasi mobile dan web menggunakan Expo, React Native, dan teknologi modern lainnya.
+        </Text>
+      </View>
 
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
+      {/* Skills */}
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>Keahlian & Teknologi</Text>
+        <View style={styles.skillContainer}>
+          <Text style={styles.badge}>React Native</Text>
+          <Text style={styles.badge}>Expo Router</Text>
+          <Text style={styles.badge}>TypeScript</Text>
+          <Text style={styles.badge}>JavaScript</Text>
+          <Text style={styles.badge}>HTML/CSS</Text>
+          <Text style={styles.badge}>Git / GitHub</Text>
+        </View>
+      </View>
 
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
+      {/* Social / Contact Links */}
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>Kontak & Sosial Media</Text>
+        
+        <TouchableOpacity 
+          style={styles.button} 
+          onPress={() => openLink('https://github.com/rcahyakirani-cyber')}
+        >
+          <Text style={styles.buttonText}>🌐 Kunjungi GitHub Saya</Text>
+        </TouchableOpacity>
 
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
+        <TouchableOpacity 
+          style={[styles.button, styles.emailButton]} 
+          onPress={() => openLink('mailto:rcahyakirani@gmail.com')}
+        >
+          <Text style={styles.buttonText}>✉️ Kirim Email</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
+    backgroundColor: '#0f172a', // Dark theme background
   },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
+  content: {
+    padding: 20,
+    maxWidth: 600,
+    alignSelf: 'center',
+    width: '100%',
   },
-  heroSection: {
+  header: {
     alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
+    marginVertical: 30,
+  },
+  avatar: {
+    width: 110,
+    height: 110,
+    borderRadius: 55,
+    borderWidth: 3,
+    borderColor: '#38bdf8',
+    marginBottom: 15,
+  },
+  name: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: '#f8fafc',
+    marginBottom: 5,
   },
   title: {
-    textAlign: 'center',
+    fontSize: 16,
+    color: '#38bdf8',
   },
-  code: {
-    textTransform: 'uppercase',
+  card: {
+    backgroundColor: '#1e293b',
+    borderRadius: 16,
+    padding: 20,
+    marginBottom: 20,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 3,
   },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
+  cardTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#f8fafc',
+    marginBottom: 10,
+  },
+  cardText: {
+    fontSize: 14,
+    color: '#94a3b8',
+    lineHeight: 22,
+  },
+  skillContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+  },
+  badge: {
+    backgroundColor: '#0284c7',
+    color: '#ffffff',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 20,
+    fontSize: 12,
+    fontWeight: '600',
+  },
+  button: {
+    backgroundColor: '#3b82f6',
+    padding: 14,
+    borderRadius: 10,
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  emailButton: {
+    backgroundColor: '#334155',
+  },
+  buttonText: {
+    color: '#ffffff',
+    fontWeight: 'bold',
+    fontSize: 14,
   },
 });
