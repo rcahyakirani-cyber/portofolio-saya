@@ -1,16 +1,25 @@
-import { Image, Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ImageSourcePropType, Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-// Ubah cara import gambar ke bentuk URI Web
-const gambar1 = Image.resolveAssetSource(require('../../assets/images/proyek1.png')).uri;
-const gambar2 = Image.resolveAssetSource(require('../../assets/images/proyek2.png')).uri;
-const gambar3 = Image.resolveAssetSource(require('../../assets/images/proyek3.png')).uri;
+// Import gambar langsung menggunakan require
+const gambar1 = require('../../assets/images/proyek1.png');
+const gambar2 = require('../../assets/images/proyek2.png');
+const gambar3 = require('../../assets/images/proyek3.png');
+
+// Tipe data agar TypeScript tidak error
+interface Project {
+  id: number;
+  title: string;
+  description: string;
+  image: ImageSourcePropType;
+  link: string;
+}
 
 export default function Home() {
   const openLink = (url: string) => {
     Linking.openURL(url);
   };
 
-  const projects = [
+  const projects: Project[] = [
     {
       id: 1,
       title: 'Desain Aplikasi Instagram',
@@ -62,7 +71,7 @@ export default function Home() {
           <Text style={styles.badge}>css</Text>
           <Text style={styles.badge}>kotlin</Text>
           <Text style={styles.badge}>JavaScript</Text>
-          </View>
+        </View>
       </View>
 
       {/* Proyek Saya */}
@@ -72,8 +81,8 @@ export default function Home() {
 
       {projects.map((item) => (
         <View key={item.id} style={styles.projectCard}>
-          {/* Karena image berbentuk URI, source panggil pakai { uri: item.image } */}
-          <Image source={{ uri: item.image }} style={styles.projectImage} resizeMode="cover" />
+          {/* Panggil langsung object require-nya di source */}
+          <Image source={item.image} style={styles.projectImage} resizeMode="cover" />
           
           <View style={styles.projectBody}>
             <Text style={styles.projectTitle}>{item.title}</Text>
