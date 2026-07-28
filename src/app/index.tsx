@@ -1,11 +1,10 @@
 import { Image, ImageSourcePropType, Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 // Import foto lokal
-const gambarProyek1 = require('../../assets/proyek1.png');
-const gambarProyek2 = require('../../assets/proyek2.png');
-const gambarProyek3 = require('../../assets/proyek3.png');
+const gambarProyek1 = require('@/assets/proyek1.png');
+const gambarProyek2 = require('@/assets/proyek2.png');
+const gambarProyek3 = require('@/assets/proyek3.png');
 
-// Tipe data khusus TypeScript untuk daftar proyek
 interface Project {
   id: number;
   title: string;
