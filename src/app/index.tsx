@@ -1,9 +1,41 @@
 import { Image, Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
+// =========================================================================
+// 📸 LOKASI FOTO GAMBAR PROYEK KAMU
+// 1. Ambil 3 foto proyek dari laptop kamu (File Explorer).
+// 2. Paste ke folder 'assets' di VS Code.
+// 3. Pastikan namanya 'proyek1.png', 'proyek2.png', dan 'proyek3.png'.
+// =========================================================================
+const gambarProyek1 = require('../../assets/proyek1.png'); // <-- Foto Proyek 1
+const gambarProyek2 = require('../../assets/proyek2.png'); // <-- Foto Proyek 2
+const gambarProyek3 = require('../../assets/proyek3.png'); // <-- Foto Proyek 3
+
 export default function Home() {
   const openLink = (url: string) => {
     Linking.openURL(url);
   };
+
+  // DATA 3 PROYEK KAMU (Silakan ubah judul, deskripsi, dan link-nya di sini)
+  const projects = [
+    {
+      id: 1,
+      title: 'Instagram', 
+      description: 'Membuat instagram menggunakan figma', 
+      image: gambarProyek1,
+    },
+    {
+      id: 2,
+      title: 'ReWear', 
+      description: 'membuat aplikasi toko thrifting baju menggunakan java kotlin', 
+      image: gambarProyek2,
+    },
+    {
+      id: 3,
+      title: 'Flappy Bird', 
+      description: 'Membuat game flappy bird menggunakan java', 
+      image: gambarProyek3,
+    },
+  ];
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
@@ -38,22 +70,38 @@ export default function Home() {
         </View>
       </View>
 
-      {/* Social / Contact Links */}
+      {/* Bagian Proyek Saya (3 Proyek) */}
+      <View style={styles.sectionHeader}>
+        <Text style={styles.sectionTitle}>🚀 Proyek Saya</Text>
+      </View>
+
+      {projects.map((item) => (
+        <View key={item.id} style={styles.projectCard}>
+          {/* Menampilkan Gambar Proyek */}
+          <Image source={item.image} style={styles.projectImage} resizeMode="cover" />
+          
+          <View style={styles.projectBody}>
+            <Text style={styles.projectTitle}>{item.title}</Text>
+            <Text style={styles.projectDescription}>{item.description}</Text>
+            
+            <TouchableOpacity 
+              style={styles.projectButton} 
+              onPress={() => openLink(item.link)}
+            >
+              <Text style={styles.buttonText}>Lihat Detail Proyek 🔗</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      ))}
+
+      {/* Sosial Media (GitHub) */}
       <View style={styles.card}>
         <Text style={styles.cardTitle}>Kontak & Sosial Media</Text>
-        
         <TouchableOpacity 
           style={styles.button} 
           onPress={() => openLink('https://github.com/rcahyakirani-cyber')}
         >
           <Text style={styles.buttonText}>🌐 Kunjungi GitHub Saya</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity 
-          style={[styles.button, styles.emailButton]} 
-          onPress={() => openLink('mailto:rcahyakirani@gmail.com')}
-        >
-          <Text style={styles.buttonText}>✉️ Kirim Email</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -63,7 +111,7 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0f172a', // Dark theme background
+    backgroundColor: '#0f172a',
   },
   content: {
     padding: 20,
@@ -98,10 +146,6 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     padding: 20,
     marginBottom: 20,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-    elevation: 3,
   },
   cardTitle: {
     fontSize: 18,
@@ -128,15 +172,50 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '600',
   },
+  sectionHeader: {
+    marginVertical: 10,
+  },
+  sectionTitle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#f8fafc',
+  },
+  projectCard: {
+    backgroundColor: '#1e293b',
+    borderRadius: 16,
+    overflow: 'hidden',
+    marginBottom: 20,
+  },
+  projectImage: {
+    width: '100%',
+    height: 200,
+  },
+  projectBody: {
+    padding: 15,
+  },
+  projectTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#f8fafc',
+    marginBottom: 6,
+  },
+  projectDescription: {
+    fontSize: 14,
+    color: '#94a3b8',
+    lineHeight: 20,
+    marginBottom: 15,
+  },
+  projectButton: {
+    backgroundColor: '#0284c7',
+    padding: 10,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
   button: {
     backgroundColor: '#3b82f6',
     padding: 14,
     borderRadius: 10,
     alignItems: 'center',
-    marginBottom: 10,
-  },
-  emailButton: {
-    backgroundColor: '#334155',
   },
   buttonText: {
     color: '#ffffff',
