@@ -1,31 +1,43 @@
-import { Image, Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ImageSourcePropType, Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
+// Import gambar sesuai lokasi di folder assets/images kamu
+const gambar1 = require('../../assets/images/proyek1.png');
+const gambar2 = require('../../assets/images/proyek2.png');
+const gambar3 = require('../../assets/images/proyek3.png');
+
+interface Project {
+  id: number;
+  title: string;
+  description: string;
+  image: ImageSourcePropType;
+  link: string;
+}
 
 export default function Home() {
   const openLink = (url: string) => {
     Linking.openURL(url);
   };
 
-  // Panggil gambar dari folder 'public' cukup pakai '/namafile.png'
-  const projects = [
+  const projects: Project[] = [
     {
       id: 1,
-      title: 'instagram',
-      description: 'membuat instagram menggunakan figma',
-      image: '/proyek1.png', 
+      title: 'Desain Aplikasi Instagram',
+      description: 'Membuat desain UI/UX aplikasi Instagram menggunakan Figma.',
+      image: gambar1,
       link: 'https://github.com/rcahyakirani-cyber',
     },
     {
       id: 2,
-      title: 'ReWear',
+      title: 'Rewear',
       description: 'Membuat aplikasi thrifting online menggunakan java kotlin.',
-      image: '/proyek2.png',
+      image: gambar2,
       link: 'https://github.com/rcahyakirani-cyber',
     },
     {
       id: 3,
-      title: 'flappy bird',
-      description: 'menggunakan javascript untuk membuat flappy bird',
-      image: '/proyek3.png',
+      title: 'Flappy Bird',
+      description: 'Menggunakan javascript untuk membuat flappy bird.',
+      image: gambar3,
       link: 'https://github.com/rcahyakirani-cyber',
     },
   ];
@@ -70,7 +82,7 @@ export default function Home() {
 
       {projects.map((item) => (
         <View key={item.id} style={styles.projectCard}>
-          <Image source={{ uri: item.image }} style={styles.projectImage} resizeMode="cover" />
+          <Image source={item.image} style={styles.projectImage} resizeMode="cover" />
           
           <View style={styles.projectBody}>
             <Text style={styles.projectTitle}>{item.title}</Text>
@@ -86,7 +98,7 @@ export default function Home() {
         </View>
       ))}
 
-      {/* Sosial Media */}
+      {/* Kontak */}
       <View style={styles.card}>
         <Text style={styles.cardTitle}>Kontak & Sosial Media</Text>
         <TouchableOpacity 
