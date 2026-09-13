@@ -1,4 +1,4 @@
-import { Tabs, TabList, TabSlot, TabTrigger } from 'expo-router/ui';
+import { TabList, Tabs, TabSlot, TabTrigger } from 'expo-router/ui';
 
 export default function AppTabs() {
   return (
