@@ -32,16 +32,16 @@ export default function Home() {
   return (
     <ScrollView style={styles.container} contentContainerStyle={[styles.content, !isWideScreen && styles.contentSmall]} showsVerticalScrollIndicator={false}>
       <View style={[styles.header, !isWideScreen && styles.headerSmall]}>
+        <View style={[styles.heroCopy, !isWideScreen && styles.heroCopySmall]}>
+          <Text style={styles.name}>Raisyah Cahya Kirani</Text>
+          <Text style={styles.title}>Pelajar SMK Negeri 10 Jakarta</Text>
+          <Text style={styles.intro}>Saya sedang belajar membuat website, aplikasi, dan desain antarmuka. Ini beberapa hal yang pernah saya kerjakan di sekolah dan di waktu luang.</Text>
+          <View style={styles.availabilityRow}><View style={styles.statusDot} /><Text style={styles.availability}>Terbuka untuk belajar</Text></View>
+        </View>
         <View style={[styles.heroVisual, !isWideScreen && styles.heroVisualSmall]}>
           <View style={styles.avatarFrame}>
             <Image source={fotoProfil} style={styles.avatarImage} resizeMode="cover" />
           </View>
-        </View>
-          <View style={[styles.heroCopy, !isWideScreen && styles.heroCopySmall]}>
-          <Text style={styles.name}>Raisyah Cahya Kirani</Text>
-          <Text style={styles.title}>Pelajar SMK Negeri 10 Jakarta</Text>
-            <Text style={styles.intro}>Saya sedang belajar membuat website, aplikasi, dan desain antarmuka.</Text>
-          <View style={styles.availabilityRow}><View style={styles.statusDot} /><Text style={styles.availability}>Terbuka untuk belajar</Text></View>
         </View>
       </View>
 
@@ -73,12 +73,12 @@ export default function Home() {
 
       <View>
         <View style={styles.sectionHeader}><Text style={styles.sectionTitle}>Proyek saya</Text></View>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.projectList}>
-          {projects.map((item) => <View key={item.id} style={[styles.projectCard, !isWideScreen && styles.projectCardSmall]}>
+        <View style={styles.projectGrid}>
+          {projects.map((item) => <View key={item.id} style={[styles.projectCard, isWideScreen && styles.projectCardWide]}>
             <Image source={item.image} style={[styles.projectImage, { aspectRatio: item.aspectRatio }]} resizeMode="contain" />
             <View style={styles.projectBody}><Text style={styles.projectCategory}>{item.category}</Text><Text style={styles.projectTitle}>{item.title}</Text><Text style={styles.projectDescription}>{item.description}</Text><Text style={styles.projectNote}>{item.note}</Text></View>
           </View>)}
-        </ScrollView>
+        </View>
       </View>
 
     </ScrollView>
@@ -86,7 +86,7 @@ export default function Home() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#e9eaec' },
+  container: { flex: 1, backgroundColor: '#e2d1bd' },
   content: { padding: 24, paddingBottom: 64, maxWidth: 900, alignSelf: 'center', width: '100%' },
   contentSmall: { paddingHorizontal: 18, paddingBottom: 44 },
   header: { flexDirection: 'row', alignItems: 'center', gap: 24, paddingVertical: 34, marginBottom: 18 },
@@ -95,39 +95,39 @@ const styles = StyleSheet.create({
   heroCopySmall: { width: '100%' },
   heroVisual: { width: 140, alignItems: 'center' },
   heroVisualSmall: { width: '100%', alignItems: 'flex-start' },
-  avatarFrame: { width: 116, height: 146, padding: 5, overflow: 'hidden', borderRadius: 60, borderWidth: 1, borderColor: '#c3c7cc', backgroundColor: '#d7d9dc' },
-  avatarImage: { width: 106, height: 136, backgroundColor: '#d7d9dc', borderRadius: 54, transform: [{ scale: 1.35 }, { translateY: -8 }] },
-  title: { fontSize: 14, lineHeight: 21, color: '#5f646b', fontWeight: '600', maxWidth: 430 },
+  avatarFrame: { width: 116, height: 146, padding: 5, overflow: 'hidden', borderRadius: 60, borderWidth: 1, borderColor: '#984c5d', backgroundColor: '#c5a68d' },
+  avatarImage: { width: 106, height: 136, backgroundColor: '#c5a68d', borderRadius: 54, transform: [{ scale: 1.35 }, { translateY: -8 }] },
+  title: { fontSize: 14, lineHeight: 21, color: '#64474b', fontWeight: '600', maxWidth: 430 },
   availabilityRow: { flexDirection: 'row', alignItems: 'center', marginTop: 13, gap: 7 },
-  statusDot: { width: 7, height: 7, borderRadius: 4, backgroundColor: '#8b9198' },
-  availability: { fontSize: 11, color: '#656b72', fontWeight: '700' },
+  statusDot: { width: 7, height: 7, borderRadius: 4, backgroundColor: '#843b4d' },
+  availability: { fontSize: 11, color: '#743445', fontWeight: '700' },
   section: { paddingTop: 18, marginTop: 26, marginBottom: 28 },
-  sectionKicker: { color: '#777d85', fontSize: 10, letterSpacing: 1.5, fontWeight: '800', marginBottom: 8 },
-  cardTitle: { fontSize: 23, lineHeight: 29, color: '#353a40', fontWeight: '800', marginBottom: 14, maxWidth: 620 },
-  cardText: { fontSize: 15, color: '#5f646b', lineHeight: 24, maxWidth: 680 },
+  sectionKicker: { color: '#843b4d', fontSize: 10, letterSpacing: 1.5, fontWeight: '800', marginBottom: 8 },
+  cardTitle: { fontSize: 23, lineHeight: 29, color: '#4a3034', fontWeight: '800', marginBottom: 14, maxWidth: 620 },
+  cardText: { fontSize: 15, color: '#684f4b', lineHeight: 24, maxWidth: 680 },
   detailGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 34, marginTop: 24, paddingTop: 10 },
   detailItem: { minWidth: 100 },
-  detailLabel: { fontSize: 10, color: '#777d85', fontWeight: '800', marginBottom: 5 },
-  detailValue: { color: '#4c5259', fontSize: 14, fontWeight: '700' },
+  detailLabel: { fontSize: 10, color: '#8b6560', fontWeight: '800', marginBottom: 5 },
+  detailValue: { color: '#5b3e42', fontSize: 14, fontWeight: '700' },
   contactBlock: { marginTop: 24, paddingTop: 10 },
-  phoneNumber: { color: '#626971', fontSize: 20, fontWeight: '800', letterSpacing: 0.5, marginTop: 4 },
-  copyHint: { color: '#858b92', fontSize: 11, marginTop: 5 },
+  phoneNumber: { color: '#843b4d', fontSize: 20, fontWeight: '800', letterSpacing: 0.5, marginTop: 4 },
+  copyHint: { color: '#8a6d68', fontSize: 11, marginTop: 5 },
   timelineItem: { flexDirection: 'row', marginTop: 18, minHeight: 100, paddingLeft: 2 },
-  timelineLine: { width: 3, backgroundColor: '#b2b7bd', marginRight: 16, marginVertical: 4, borderRadius: 2 },
+  timelineLine: { width: 3, backgroundColor: '#9b5361', marginRight: 16, marginVertical: 4, borderRadius: 2 },
   timelineContent: { flex: 1, paddingBottom: 16 },
-  timelinePeriod: { color: '#777d85', fontSize: 10, fontWeight: '800', marginBottom: 6 },
-  timelineTitle: { color: '#4a5057', fontSize: 17, fontWeight: '700', marginBottom: 6 },
+  timelinePeriod: { color: '#843b4d', fontSize: 10, fontWeight: '800', marginBottom: 6 },
+  timelineTitle: { color: '#5b3e42', fontSize: 17, fontWeight: '700', marginBottom: 6 },
   skillContainer: { flexDirection: 'row', flexWrap: 'wrap', columnGap: 20, rowGap: 12 },
-  badge: { color: '#5e646b', paddingBottom: 6, borderBottomWidth: 1, borderBottomColor: '#b9bdc2', fontSize: 14, fontWeight: '700' },
+  badge: { color: '#743445', paddingBottom: 6, borderBottomWidth: 1, borderBottomColor: '#b88788', fontSize: 14, fontWeight: '700' },
   sectionHeader: { marginBottom: 22 },
-  sectionTitle: { fontSize: 25, lineHeight: 31, color: '#353a40', fontWeight: '800' },
-  projectList: { gap: 20, paddingRight: 24 },
-  projectCard: { width: 290, overflow: 'hidden', marginBottom: 12, backgroundColor: '#f4f5f6', borderRadius: 12, padding: 12 },
-  projectCardSmall: { width: 270 },
-  projectImage: { width: '100%', height: 190, backgroundColor: '#dfe1e4', borderRadius: 8 },
+  sectionTitle: { fontSize: 25, lineHeight: 31, color: '#4a3034', fontWeight: '800' },
+  projectGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 20 },
+  projectCard: { width: '100%', overflow: 'hidden', marginBottom: 12, backgroundColor: '#eadccd', borderRadius: 8, padding: 12 },
+  projectCardWide: { width: '47%' },
+  projectImage: { width: '100%', height: 190, backgroundColor: '#d2bbaa', borderRadius: 5 },
   projectBody: { paddingTop: 14 },
-  projectCategory: { color: '#777d85', fontSize: 10, letterSpacing: 1.2, fontWeight: '800', marginBottom: 7 },
-  projectTitle: { fontSize: 21, color: '#353a40', fontWeight: '800', marginBottom: 7 },
-  projectDescription: { fontSize: 14, color: '#656b72', lineHeight: 21, marginBottom: 15 },
-  projectNote: { fontSize: 13, color: '#777d85', lineHeight: 19, fontStyle: 'italic' },
+  projectCategory: { color: '#843b4d', fontSize: 10, letterSpacing: 1.2, fontWeight: '800', marginBottom: 7 },
+  projectTitle: { fontSize: 21, color: '#4a3034', fontWeight: '800', marginBottom: 7 },
+  projectDescription: { fontSize: 14, color: '#684f4b', lineHeight: 21, marginBottom: 15 },
+  projectNote: { fontSize: 13, color: '#8a6d68', lineHeight: 19, fontStyle: 'italic' },
 });
