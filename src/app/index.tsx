@@ -30,10 +30,17 @@ export default function Home() {
   const { width } = useWindowDimensions();
   const isWideScreen = width >= 700;
   const pageMotion = useRef(new Animated.Value(0)).current;
+  const statusPulse = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
     Animated.timing(pageMotion, { toValue: 1, duration: 700, useNativeDriver: true }).start();
-  }, [pageMotion]);
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(statusPulse, { toValue: 0.45, duration: 1200, useNativeDriver: true }),
+        Animated.timing(statusPulse, { toValue: 1, duration: 1200, useNativeDriver: true }),
+      ])
+    ).start();
+  }, [pageMotion, statusPulse]);
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={[styles.content, !isWideScreen && styles.contentSmall]} showsVerticalScrollIndicator={false}>
@@ -45,12 +52,12 @@ export default function Home() {
           <Text style={[styles.name, !isWideScreen && styles.nameSmall]}>Raisyah Cahya Kirani</Text>
           <Text style={styles.title}>Pelajar SMK Negeri 10 Jakarta</Text>
           <Text style={styles.intro}>Saya sedang belajar membuat website, aplikasi, dan desain antarmuka. Ini beberapa hal yang pernah saya kerjakan di sekolah dan di waktu luang.</Text>
-          <View style={styles.availabilityRow}><View style={styles.statusDot} /><Text style={styles.availability}>AVAILABLE TO LEARN</Text></View>
+          <View style={styles.availabilityRow}><Animated.View style={[styles.statusDot, { opacity: statusPulse }]} /><Text style={styles.availability}>AVAILABLE TO LEARN</Text></View>
         </View>
         <View style={[styles.heroVisual, !isWideScreen && styles.heroVisualSmall]}>
-          <View style={styles.avatarFrame}>
+          <Animated.View style={[styles.avatarFrame, { transform: [{ scale: pageMotion.interpolate({ inputRange: [0, 1], outputRange: [0.94, 1] }) }] }]}>
             <Image source={fotoProfil} style={styles.avatarImage} resizeMode="cover" />
-          </View>
+          </Animated.View>
         </View>
       </View>
       </View>
