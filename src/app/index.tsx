@@ -1,4 +1,5 @@
-import { Image, ImageSourcePropType, Linking, Pressable, ScrollView, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
+import { useEffect, useRef } from 'react';
+import { Animated, Image, ImageSourcePropType, Linking, Pressable, ScrollView, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
 
 const gambar1 = require('../../assets/images/proyek1.png');
 const gambar2 = require('../../assets/images/proyek2.png');
@@ -28,17 +29,23 @@ const projects: Project[] = [
 export default function Home() {
   const { width } = useWindowDimensions();
   const isWideScreen = width >= 700;
+  const pageMotion = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.timing(pageMotion, { toValue: 1, duration: 700, useNativeDriver: true }).start();
+  }, [pageMotion]);
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={[styles.content, !isWideScreen && styles.contentSmall]} showsVerticalScrollIndicator={false}>
+      <Animated.View style={[styles.pageReveal, { opacity: pageMotion, transform: [{ translateY: pageMotion.interpolate({ inputRange: [0, 1], outputRange: [18, 0] }) }] }]}>
       <View style={[styles.heroSection, !isWideScreen && styles.heroSectionSmall]}>
       <View style={[styles.header, !isWideScreen && styles.headerSmall]}>
         <View style={[styles.heroCopy, !isWideScreen && styles.heroCopySmall]}>
-          <Text style={styles.sectionKicker}>Halo, ini portfolio saya</Text>
+          <Text style={styles.sectionKicker}>PORTFOLIO SAYA</Text>
           <Text style={[styles.name, !isWideScreen && styles.nameSmall]}>Raisyah Cahya Kirani</Text>
           <Text style={styles.title}>Pelajar SMK Negeri 10 Jakarta</Text>
           <Text style={styles.intro}>Saya sedang belajar membuat website, aplikasi, dan desain antarmuka. Ini beberapa hal yang pernah saya kerjakan di sekolah dan di waktu luang.</Text>
-          <View style={styles.availabilityRow}><View style={styles.statusDot} /><Text style={styles.availability}>Sedang terus belajar</Text></View>
+          <View style={styles.availabilityRow}><View style={styles.statusDot} /><Text style={styles.availability}>AVAILABLE TO LEARN</Text></View>
         </View>
         <View style={[styles.heroVisual, !isWideScreen && styles.heroVisualSmall]}>
           <View style={styles.avatarFrame}>
@@ -51,12 +58,12 @@ export default function Home() {
       <View style={[styles.infoSection, !isWideScreen && styles.infoSectionSmall]}>
       <View style={[styles.infoGrid, !isWideScreen && styles.infoGridSmall]}>
         <View style={styles.infoBlock}>
-          <Text style={styles.sectionKicker}>Sekolah</Text>
+          <Text style={styles.sectionKicker}>EDUCATION</Text>
           <Text style={styles.infoTitle}>SMK Negeri 10 Jakarta</Text>
           <Text style={styles.cardText}>Pelajar yang sedang memperdalam frontend, aplikasi mobile, dan desain UI/UX.</Text>
         </View>
         <View style={styles.infoBlock}>
-          <Text style={styles.sectionKicker}>Pengalaman</Text>
+          <Text style={styles.sectionKicker}>WHAT I DO</Text>
           <Text style={styles.infoTitle}>Proyek sekolah dan personal</Text>
           <Text style={styles.cardText}>Mencoba membuat desain di Figma, aplikasi Android dengan Java/Kotlin, dan latihan web dengan JavaScript serta React Native.</Text>
         </View>
@@ -64,13 +71,13 @@ export default function Home() {
       </View>
 
       <View style={[styles.section, styles.skillsSection]}>
-        <Text style={styles.sectionKicker}>Yang sedang saya pelajari</Text>
-        <Text style={styles.cardTitle}>Sedikit demi sedikit, saya coba pahami.</Text>
+        <Text style={styles.sectionKicker}>SKILLS</Text>
+        <Text style={styles.cardTitle}>Hal yang sedang saya pelajari.</Text>
         <View style={styles.skillContainer}>{['UI/UX Design', 'JavaScript', 'React Native', 'Kotlin', 'CSS', 'Git dasar', 'Problem Solving'].map((skill) => <Text key={skill} style={styles.badge}>{skill}</Text>)}</View>
       </View>
 
       <View style={styles.projectsSection}>
-        <View style={styles.sectionHeader}><Text style={styles.sectionKicker}>Kumpulan proyek</Text><Text style={styles.sectionTitle}>Hal-hal yang pernah saya coba.</Text></View>
+        <View style={styles.sectionHeader}><Text style={styles.sectionKicker}>SELECTED WORKS</Text><Text style={styles.sectionTitle}>Proyek yang pernah saya coba.</Text></View>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.projectList}>
           {projects.map((item) => <View key={item.id} style={[styles.projectCard, isWideScreen && styles.projectCardWide]}>
             <Image source={item.image} style={[styles.projectImage, { aspectRatio: item.aspectRatio }]} resizeMode="contain" />
@@ -80,6 +87,7 @@ export default function Home() {
       </View>
 
       <View style={styles.contactSection}>
+        <Text style={styles.sectionKicker}>GET IN TOUCH</Text>
         <Pressable onPress={() => Linking.openURL('https://wa.me/6288291572296')}>
           <Text style={styles.contactLink}>WhatsApp: 0882 9157 2296</Text>
         </Pressable>
@@ -87,6 +95,8 @@ export default function Home() {
           <Text style={styles.contactLink}>GitHub: github.com/rcahyakirani-cyber</Text>
         </Pressable>
       </View>
+
+      </Animated.View>
 
     </ScrollView>
   );
@@ -96,6 +106,7 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#071426' },
   content: { paddingBottom: 0, width: '100%' },
   contentSmall: { paddingBottom: 0 },
+  pageReveal: { width: '100%' },
   heroSection: { backgroundColor: '#071426' },
   heroSectionSmall: { backgroundColor: '#071426' },
   header: { flexDirection: 'row', alignItems: 'center', gap: 46, paddingVertical: 76, paddingHorizontal: '10%', minHeight: 560 },
