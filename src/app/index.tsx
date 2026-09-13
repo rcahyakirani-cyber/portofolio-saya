@@ -69,10 +69,12 @@ export default function Home() {
 
       <View>
         <View style={styles.sectionHeader}><Text style={styles.sectionTitle}>Proyek saya</Text></View>
-        {projects.map((item) => <View key={item.id} style={styles.projectCard}>
-          <Image source={item.image} style={[styles.projectImage, { aspectRatio: item.aspectRatio }]} resizeMode="contain" />
-          <View style={styles.projectBody}><Text style={styles.projectCategory}>{item.category}</Text><Text style={styles.projectTitle}>{item.title}</Text><Text style={styles.projectDescription}>{item.description}</Text></View>
-        </View>)}
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.projectList}>
+          {projects.map((item) => <View key={item.id} style={styles.projectCard}>
+            <Image source={item.image} style={[styles.projectImage, { aspectRatio: item.aspectRatio }]} resizeMode="contain" />
+            <View style={styles.projectBody}><Text style={styles.projectCategory}>{item.category}</Text><Text style={styles.projectTitle}>{item.title}</Text><Text style={styles.projectDescription}>{item.description}</Text></View>
+          </View>)}
+        </ScrollView>
       </View>
 
     </ScrollView>
@@ -80,41 +82,42 @@ export default function Home() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#252223' },
-  content: { padding: 24, paddingBottom: 64, maxWidth: 820, alignSelf: 'center', width: '100%' },
-  header: { flexDirection: 'row', alignItems: 'center', gap: 24, paddingVertical: 30, marginBottom: 26 },
+  container: { flex: 1, backgroundColor: '#e9eaec' },
+  content: { padding: 24, paddingBottom: 64, maxWidth: 900, alignSelf: 'center', width: '100%' },
+  header: { flexDirection: 'row', alignItems: 'center', gap: 24, paddingVertical: 34, marginBottom: 18 },
   heroCopy: { flex: 1, minWidth: 0 },
   heroVisual: { width: 140, alignItems: 'center' },
-  avatarFrame: { width: 116, height: 146, padding: 5, overflow: 'hidden', borderRadius: 60, borderWidth: 1, borderColor: '#9c5660', backgroundColor: '#3a292b' },
-  avatarImage: { width: 106, height: 136, backgroundColor: '#3a292b', borderRadius: 54, transform: [{ scale: 1.35 }, { translateY: -8 }] },
-  title: { fontSize: 14, lineHeight: 21, color: '#f0ded9', fontWeight: '600', maxWidth: 430 },
+  avatarFrame: { width: 116, height: 146, padding: 5, overflow: 'hidden', borderRadius: 60, borderWidth: 1, borderColor: '#c3c7cc', backgroundColor: '#d7d9dc' },
+  avatarImage: { width: 106, height: 136, backgroundColor: '#d7d9dc', borderRadius: 54, transform: [{ scale: 1.35 }, { translateY: -8 }] },
+  title: { fontSize: 14, lineHeight: 21, color: '#5f646b', fontWeight: '600', maxWidth: 430 },
   availabilityRow: { flexDirection: 'row', alignItems: 'center', marginTop: 13, gap: 7 },
-  statusDot: { width: 7, height: 7, borderRadius: 4, backgroundColor: '#d9a6a0' },
-  availability: { fontSize: 11, color: '#d9a6a0', fontWeight: '700' },
+  statusDot: { width: 7, height: 7, borderRadius: 4, backgroundColor: '#8b9198' },
+  availability: { fontSize: 11, color: '#656b72', fontWeight: '700' },
   section: { paddingTop: 18, marginTop: 26, marginBottom: 28 },
-  sectionKicker: { color: '#e1a6a2', fontSize: 10, letterSpacing: 1.5, fontWeight: '800', marginBottom: 8 },
-  cardTitle: { fontSize: 23, lineHeight: 29, color: '#fff4f0', fontWeight: '800', marginBottom: 14, maxWidth: 620 },
-  cardText: { fontSize: 15, color: '#ead8d4', lineHeight: 24, maxWidth: 680 },
+  sectionKicker: { color: '#777d85', fontSize: 10, letterSpacing: 1.5, fontWeight: '800', marginBottom: 8 },
+  cardTitle: { fontSize: 23, lineHeight: 29, color: '#353a40', fontWeight: '800', marginBottom: 14, maxWidth: 620 },
+  cardText: { fontSize: 15, color: '#5f646b', lineHeight: 24, maxWidth: 680 },
   detailGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 34, marginTop: 24, paddingTop: 10 },
   detailItem: { minWidth: 100 },
-  detailLabel: { fontSize: 10, color: '#d0aaa6', fontWeight: '800', marginBottom: 5 },
-  detailValue: { color: '#fff0eb', fontSize: 14, fontWeight: '700' },
+  detailLabel: { fontSize: 10, color: '#777d85', fontWeight: '800', marginBottom: 5 },
+  detailValue: { color: '#4c5259', fontSize: 14, fontWeight: '700' },
   contactBlock: { marginTop: 24, paddingTop: 10 },
-  phoneNumber: { color: '#f0b8b2', fontSize: 20, fontWeight: '800', letterSpacing: 0.5, marginTop: 4 },
-  copyHint: { color: '#cba9a5', fontSize: 11, marginTop: 5 },
+  phoneNumber: { color: '#626971', fontSize: 20, fontWeight: '800', letterSpacing: 0.5, marginTop: 4 },
+  copyHint: { color: '#858b92', fontSize: 11, marginTop: 5 },
   timelineItem: { flexDirection: 'row', marginTop: 18, minHeight: 100, paddingLeft: 2 },
-  timelineLine: { width: 3, backgroundColor: '#a45b66', marginRight: 16, marginVertical: 4, borderRadius: 2 },
+  timelineLine: { width: 3, backgroundColor: '#b2b7bd', marginRight: 16, marginVertical: 4, borderRadius: 2 },
   timelineContent: { flex: 1, paddingBottom: 16 },
-  timelinePeriod: { color: '#e1a6a2', fontSize: 10, fontWeight: '800', marginBottom: 6 },
-  timelineTitle: { color: '#fff0eb', fontSize: 17, fontWeight: '700', marginBottom: 6 },
+  timelinePeriod: { color: '#777d85', fontSize: 10, fontWeight: '800', marginBottom: 6 },
+  timelineTitle: { color: '#4a5057', fontSize: 17, fontWeight: '700', marginBottom: 6 },
   skillContainer: { flexDirection: 'row', flexWrap: 'wrap', columnGap: 20, rowGap: 12 },
-  badge: { color: '#e2b5ad', paddingBottom: 6, borderBottomWidth: 1, borderBottomColor: '#9c5660', fontSize: 14, fontWeight: '700' },
+  badge: { color: '#5e646b', paddingBottom: 6, borderBottomWidth: 1, borderBottomColor: '#b9bdc2', fontSize: 14, fontWeight: '700' },
   sectionHeader: { marginBottom: 22 },
-  sectionTitle: { fontSize: 25, lineHeight: 31, color: '#fff4f0', fontWeight: '800' },
-  projectCard: { flexDirection: 'row', gap: 22, overflow: 'hidden', marginBottom: 34, paddingBottom: 8 },
-  projectImage: { width: '42%', minHeight: 150, backgroundColor: '#382b2d', borderRadius: 8 },
-  projectBody: { flex: 1, paddingTop: 4 },
-  projectCategory: { color: '#e1a6a2', fontSize: 10, letterSpacing: 1.2, fontWeight: '800', marginBottom: 7 },
-  projectTitle: { fontSize: 21, color: '#fff4f0', fontWeight: '800', marginBottom: 7 },
-  projectDescription: { fontSize: 14, color: '#ead8d4', lineHeight: 21, marginBottom: 15 },
+  sectionTitle: { fontSize: 25, lineHeight: 31, color: '#353a40', fontWeight: '800' },
+  projectList: { gap: 20, paddingRight: 24 },
+  projectCard: { width: 290, overflow: 'hidden', marginBottom: 12, backgroundColor: '#f4f5f6', borderRadius: 12, padding: 12 },
+  projectImage: { width: '100%', height: 190, backgroundColor: '#dfe1e4', borderRadius: 8 },
+  projectBody: { paddingTop: 14 },
+  projectCategory: { color: '#777d85', fontSize: 10, letterSpacing: 1.2, fontWeight: '800', marginBottom: 7 },
+  projectTitle: { fontSize: 21, color: '#353a40', fontWeight: '800', marginBottom: 7 },
+  projectDescription: { fontSize: 14, color: '#656b72', lineHeight: 21, marginBottom: 15 },
 });
