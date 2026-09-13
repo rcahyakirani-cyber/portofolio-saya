@@ -32,9 +32,15 @@ export default function Home() {
   const pageMotion = useRef(new Animated.Value(0)).current;
   const statusPulse = useRef(new Animated.Value(1)).current;
   const scrollMotion = useRef(new Animated.Value(0)).current;
+  const heroTextMotion = useRef(new Animated.Value(0)).current;
+  const heroImageMotion = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    Animated.timing(pageMotion, { toValue: 1, duration: 700, useNativeDriver: true }).start();
+    Animated.parallel([
+      Animated.timing(pageMotion, { toValue: 1, duration: 650, useNativeDriver: true }),
+      Animated.timing(heroTextMotion, { toValue: 1, duration: 700, delay: 120, useNativeDriver: true }),
+      Animated.spring(heroImageMotion, { toValue: 1, friction: 7, tension: 45, delay: 220, useNativeDriver: true }),
+    ]).start();
     Animated.loop(
       Animated.sequence([
         Animated.timing(statusPulse, { toValue: 0.45, duration: 1200, useNativeDriver: true }),
@@ -53,18 +59,18 @@ export default function Home() {
       <Animated.View style={[styles.pageReveal, { opacity: pageMotion, transform: [{ translateY: pageMotion.interpolate({ inputRange: [0, 1], outputRange: [18, 0] }) }] }]}>
       <View style={[styles.heroSection, !isWideScreen && styles.heroSectionSmall]}>
       <View style={[styles.header, !isWideScreen && styles.headerSmall]}>
-        <View style={[styles.heroCopy, !isWideScreen && styles.heroCopySmall]}>
+        <Animated.View style={[styles.heroCopy, !isWideScreen && styles.heroCopySmall, { opacity: heroTextMotion, transform: [{ translateY: heroTextMotion.interpolate({ inputRange: [0, 1], outputRange: [22, 0] }) }] }]}>
           <Text style={styles.sectionKicker}>PORTFOLIO SAYA</Text>
           <Text style={[styles.name, !isWideScreen && styles.nameSmall]}>Raisyah Cahya Kirani</Text>
           <Text style={styles.title}>Pelajar SMK Negeri 10 Jakarta</Text>
           <Text style={styles.intro}>Saya sedang belajar membuat website, aplikasi, dan desain antarmuka. Ini beberapa hal yang pernah saya kerjakan di sekolah dan di waktu luang.</Text>
           <View style={styles.availabilityRow}><Animated.View style={[styles.statusDot, { opacity: statusPulse }]} /><Text style={styles.availability}>SEDANG BELAJAR</Text></View>
-        </View>
-        <View style={[styles.heroVisual, !isWideScreen && styles.heroVisualSmall]}>
-          <Animated.View style={[styles.avatarFrame, { transform: [{ scale: pageMotion.interpolate({ inputRange: [0, 1], outputRange: [0.94, 1] }) }] }]}>
+        </Animated.View>
+        <Animated.View style={[styles.heroVisual, !isWideScreen && styles.heroVisualSmall, { opacity: heroImageMotion, transform: [{ scale: heroImageMotion.interpolate({ inputRange: [0, 1], outputRange: [0.86, 1] }) }] }]}>
+          <View style={styles.avatarFrame}>
             <Image source={fotoProfil} style={styles.avatarImage} resizeMode="cover" />
-          </Animated.View>
-        </View>
+          </View>
+        </Animated.View>
       </View>
       </View>
 
