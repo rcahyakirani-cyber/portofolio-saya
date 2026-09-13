@@ -31,10 +31,11 @@ export default function Home() {
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={[styles.content, !isWideScreen && styles.contentSmall]} showsVerticalScrollIndicator={false}>
+      <View style={[styles.heroSection, !isWideScreen && styles.heroSectionSmall]}>
       <View style={[styles.header, !isWideScreen && styles.headerSmall]}>
         <View style={[styles.heroCopy, !isWideScreen && styles.heroCopySmall]}>
           <Text style={styles.sectionKicker}>INTRODUCTION</Text>
-          <Text style={styles.name}>Raisyah Cahya Kirani</Text>
+          <Text style={[styles.name, !isWideScreen && styles.nameSmall]}>Raisyah Cahya Kirani</Text>
           <Text style={styles.title}>Pelajar SMK Negeri 10 Jakarta</Text>
           <Text style={styles.intro}>Saya sedang belajar membuat website, aplikasi, dan desain antarmuka. Ini beberapa hal yang pernah saya kerjakan di sekolah dan di waktu luang.</Text>
           <View style={styles.availabilityRow}><View style={styles.statusDot} /><Text style={styles.availability}>Terbuka untuk belajar</Text></View>
@@ -45,7 +46,9 @@ export default function Home() {
           </View>
         </View>
       </View>
+      </View>
 
+      <View style={[styles.infoSection, !isWideScreen && styles.infoSectionSmall]}>
       <View style={[styles.infoGrid, !isWideScreen && styles.infoGridSmall]}>
         <View style={styles.infoBlock}>
           <Text style={styles.sectionKicker}>EDUCATION</Text>
@@ -58,14 +61,15 @@ export default function Home() {
           <Text style={styles.cardText}>Mencoba membuat desain di Figma, aplikasi Android dengan Java/Kotlin, dan latihan web dengan JavaScript serta React Native.</Text>
         </View>
       </View>
+      </View>
 
-      <View style={styles.section}>
+      <View style={[styles.section, styles.skillsSection]}>
         <Text style={styles.sectionKicker}>SKILLS</Text>
         <Text style={styles.cardTitle}>Yang sedang dipelajari</Text>
         <View style={styles.skillContainer}>{['UI/UX Design', 'JavaScript', 'React Native', 'Kotlin', 'CSS', 'Git dasar', 'Problem Solving'].map((skill) => <Text key={skill} style={styles.badge}>{skill}</Text>)}</View>
       </View>
 
-      <View>
+      <View style={styles.projectsSection}>
         <View style={styles.sectionHeader}><Text style={styles.sectionKicker}>MY PROJECTS</Text><Text style={styles.sectionTitle}>Beberapa karya yang pernah saya buat.</Text></View>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.projectList}>
           {projects.map((item) => <View key={item.id} style={[styles.projectCard, isWideScreen && styles.projectCardWide]}>
@@ -80,52 +84,61 @@ export default function Home() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#e2d1bd' },
-  content: { padding: 24, paddingBottom: 64, maxWidth: 900, alignSelf: 'center', width: '100%' },
-  contentSmall: { paddingHorizontal: 18, paddingBottom: 44 },
-  header: { flexDirection: 'row', alignItems: 'center', gap: 24, paddingVertical: 34, marginBottom: 18 },
-  headerSmall: { flexDirection: 'column', alignItems: 'stretch', gap: 18, paddingVertical: 24, marginBottom: 8 },
+  container: { flex: 1, backgroundColor: '#071426' },
+  content: { paddingBottom: 0, width: '100%' },
+  contentSmall: { paddingBottom: 0 },
+  heroSection: { backgroundColor: '#071426' },
+  heroSectionSmall: { backgroundColor: '#071426' },
+  header: { flexDirection: 'row', alignItems: 'center', gap: 46, paddingVertical: 76, paddingHorizontal: '10%', minHeight: 560 },
+  headerSmall: { flexDirection: 'column-reverse', alignItems: 'stretch', gap: 26, paddingVertical: 46, paddingHorizontal: 24, minHeight: 0 },
   heroCopy: { flex: 1, minWidth: 0 },
   heroCopySmall: { width: '100%' },
-  heroVisual: { width: 140, alignItems: 'center' },
-  heroVisualSmall: { width: '100%', alignItems: 'flex-start' },
-  avatarFrame: { width: 116, height: 146, padding: 5, overflow: 'hidden', borderRadius: 60, borderWidth: 1, borderColor: '#984c5d', backgroundColor: '#c5a68d' },
-  avatarImage: { width: 106, height: 136, backgroundColor: '#c5a68d', borderRadius: 54, transform: [{ scale: 1.35 }, { translateY: -8 }] },
-  title: { fontSize: 14, lineHeight: 21, color: '#64474b', fontWeight: '600', maxWidth: 430 },
+  heroVisual: { width: 300, alignItems: 'center' },
+  heroVisualSmall: { width: '100%', alignItems: 'center' },
+  name: { fontSize: 56, lineHeight: 62, color: '#ffffff', fontWeight: '900', marginBottom: 10, maxWidth: 700 },
+  nameSmall: { fontSize: 38, lineHeight: 44 },
+  intro: { color: '#d9e8f5', fontSize: 20, lineHeight: 30, maxWidth: 650, marginTop: 18 },
+  avatarFrame: { width: 260, height: 330, padding: 8, overflow: 'hidden', borderRadius: 132, borderWidth: 2, borderColor: '#4a91c7', backgroundColor: '#163052' },
+  avatarImage: { width: 244, height: 314, backgroundColor: '#163052', borderRadius: 124, transform: [{ scale: 1.35 }, { translateY: -8 }] },
+  title: { fontSize: 21, lineHeight: 30, color: '#d9e8f5', fontWeight: '600', maxWidth: 560 },
   availabilityRow: { flexDirection: 'row', alignItems: 'center', marginTop: 13, gap: 7 },
-  statusDot: { width: 7, height: 7, borderRadius: 4, backgroundColor: '#843b4d' },
-  availability: { fontSize: 11, color: '#743445', fontWeight: '700' },
-  section: { paddingTop: 18, marginTop: 26, marginBottom: 28 },
-  sectionKicker: { color: '#843b4d', fontSize: 10, letterSpacing: 1.5, fontWeight: '800', marginBottom: 8 },
-  cardTitle: { fontSize: 23, lineHeight: 29, color: '#4a3034', fontWeight: '800', marginBottom: 14, maxWidth: 620 },
-  cardText: { fontSize: 15, color: '#684f4b', lineHeight: 24, maxWidth: 680 },
-  infoGrid: { flexDirection: 'row', gap: 32, marginTop: 12, marginBottom: 12 },
-  infoGridSmall: { flexDirection: 'column', gap: 8 },
-  infoBlock: { flex: 1, paddingVertical: 10 },
-  infoTitle: { color: '#5b3e42', fontSize: 17, fontWeight: '800', marginBottom: 8 },
+  statusDot: { width: 9, height: 9, borderRadius: 5, backgroundColor: '#6db5e8' },
+  availability: { fontSize: 14, color: '#a9d3f0', fontWeight: '700' },
+  infoSection: { backgroundColor: '#0d2745', paddingVertical: 54, paddingHorizontal: '10%' },
+  infoSectionSmall: { paddingVertical: 36, paddingHorizontal: 24 },
+  infoGrid: { flexDirection: 'row', gap: 54 },
+  infoGridSmall: { flexDirection: 'column', gap: 28 },
+  infoBlock: { flex: 1 },
+  infoTitle: { color: '#f4f8fc', fontSize: 23, fontWeight: '800', marginBottom: 10 },
+  section: { paddingVertical: 62, paddingHorizontal: '10%', marginTop: 0, marginBottom: 0, backgroundColor: '#071426' },
+  skillsSection: { backgroundColor: '#071426' },
+  sectionKicker: { color: '#73b9e8', fontSize: 13, letterSpacing: 1.6, fontWeight: '800', marginBottom: 11 },
+  cardTitle: { fontSize: 31, lineHeight: 38, color: '#f4f8fc', fontWeight: '800', marginBottom: 17, maxWidth: 760 },
+  cardText: { fontSize: 17, color: '#d9e8f5', lineHeight: 28, maxWidth: 760 },
   detailGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 34, marginTop: 24, paddingTop: 10 },
   detailItem: { minWidth: 100 },
-  detailLabel: { fontSize: 10, color: '#8b6560', fontWeight: '800', marginBottom: 5 },
-  detailValue: { color: '#5b3e42', fontSize: 14, fontWeight: '700' },
+  detailLabel: { fontSize: 12, color: '#8fc4e8', fontWeight: '800', marginBottom: 6 },
+  detailValue: { color: '#f1f7fc', fontSize: 16, fontWeight: '700' },
   contactBlock: { marginTop: 24, paddingTop: 10 },
-  phoneNumber: { color: '#843b4d', fontSize: 20, fontWeight: '800', letterSpacing: 0.5, marginTop: 4 },
-  copyHint: { color: '#8a6d68', fontSize: 11, marginTop: 5 },
+  phoneNumber: { color: '#91c9ee', fontSize: 23, fontWeight: '800', letterSpacing: 0.5, marginTop: 4 },
+  copyHint: { color: '#9bbbd2', fontSize: 12, marginTop: 6 },
   timelineItem: { flexDirection: 'row', marginTop: 18, minHeight: 100, paddingLeft: 2 },
-  timelineLine: { width: 3, backgroundColor: '#9b5361', marginRight: 16, marginVertical: 4, borderRadius: 2 },
+  timelineLine: { width: 3, backgroundColor: '#4a91c7', marginRight: 16, marginVertical: 4, borderRadius: 2 },
   timelineContent: { flex: 1, paddingBottom: 16 },
-  timelinePeriod: { color: '#843b4d', fontSize: 10, fontWeight: '800', marginBottom: 6 },
-  timelineTitle: { color: '#5b3e42', fontSize: 17, fontWeight: '700', marginBottom: 6 },
+  timelinePeriod: { color: '#73b9e8', fontSize: 13, fontWeight: '800', marginBottom: 7 },
+  timelineTitle: { color: '#f4f8fc', fontSize: 21, lineHeight: 27, fontWeight: '700', marginBottom: 7 },
   skillContainer: { flexDirection: 'row', flexWrap: 'wrap', columnGap: 20, rowGap: 12 },
-  badge: { color: '#743445', paddingBottom: 6, borderBottomWidth: 1, borderBottomColor: '#b88788', fontSize: 14, fontWeight: '700' },
-  sectionHeader: { marginBottom: 22 },
-  sectionTitle: { fontSize: 25, lineHeight: 31, color: '#4a3034', fontWeight: '800' },
-  projectList: { gap: 22, paddingRight: 24 },
-  projectCard: { width: 310, overflow: 'hidden', marginBottom: 12, backgroundColor: '#eadccd', borderRadius: 8, padding: 14 },
-  projectCardWide: { width: 390 },
-  projectImage: { width: '100%', height: 245, backgroundColor: '#d2bbaa', borderRadius: 5 },
+  badge: { color: '#b9ddf4', paddingBottom: 7, borderBottomWidth: 1, borderBottomColor: '#4a91c7', fontSize: 17, fontWeight: '700' },
+  projectsSection: { backgroundColor: '#0d2745', paddingVertical: 62, paddingHorizontal: '10%' },
+  sectionHeader: { marginBottom: 26 },
+  sectionTitle: { fontSize: 32, lineHeight: 39, color: '#f4f8fc', fontWeight: '800' },
+  projectList: { gap: 26, paddingRight: 24 },
+  projectCard: { width: 330, overflow: 'hidden', marginBottom: 12, backgroundColor: '#153557', borderRadius: 10, padding: 16 },
+  projectCardWide: { width: 430 },
+  projectImage: { width: '100%', height: 270, backgroundColor: '#102942', borderRadius: 6 },
   projectBody: { paddingTop: 16 },
-  projectCategory: { color: '#843b4d', fontSize: 11, letterSpacing: 1.2, fontWeight: '800', marginBottom: 8 },
-  projectTitle: { fontSize: 24, lineHeight: 29, color: '#4a3034', fontWeight: '800', marginBottom: 9 },
-  projectDescription: { fontSize: 15, color: '#684f4b', lineHeight: 23, marginBottom: 16 },
-  projectNote: { fontSize: 14, color: '#8a6d68', lineHeight: 20, fontStyle: 'italic' },
+  projectCategory: { color: '#8fc4e8', fontSize: 13, letterSpacing: 1, fontWeight: '800', marginBottom: 9 },
+  projectTitle: { fontSize: 26, lineHeight: 32, color: '#f4f8fc', fontWeight: '800', marginBottom: 9 },
+  projectDescription: { fontSize: 17, color: '#d9e8f5', lineHeight: 26, marginBottom: 16 },
+  projectNote: { fontSize: 15, color: '#a9c7dc', lineHeight: 22, fontStyle: 'italic' },
 });
