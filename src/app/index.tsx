@@ -31,6 +31,7 @@ export default function Home() {
   const isWideScreen = width >= 700;
   const pageMotion = useRef(new Animated.Value(0)).current;
   const statusPulse = useRef(new Animated.Value(1)).current;
+  const scrollMotion = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     Animated.timing(pageMotion, { toValue: 1, duration: 700, useNativeDriver: true }).start();
@@ -43,7 +44,12 @@ export default function Home() {
   }, [pageMotion, statusPulse]);
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={[styles.content, !isWideScreen && styles.contentSmall]} showsVerticalScrollIndicator={false}>
+    <Animated.ScrollView
+      style={styles.container}
+      contentContainerStyle={[styles.content, !isWideScreen && styles.contentSmall]}
+      showsVerticalScrollIndicator={false}
+      scrollEventThrottle={16}
+      onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollMotion } } }], { useNativeDriver: true })}>
       <Animated.View style={[styles.pageReveal, { opacity: pageMotion, transform: [{ translateY: pageMotion.interpolate({ inputRange: [0, 1], outputRange: [18, 0] }) }] }]}>
       <View style={[styles.heroSection, !isWideScreen && styles.heroSectionSmall]}>
       <View style={[styles.header, !isWideScreen && styles.headerSmall]}>
@@ -52,7 +58,7 @@ export default function Home() {
           <Text style={[styles.name, !isWideScreen && styles.nameSmall]}>Raisyah Cahya Kirani</Text>
           <Text style={styles.title}>Pelajar SMK Negeri 10 Jakarta</Text>
           <Text style={styles.intro}>Saya sedang belajar membuat website, aplikasi, dan desain antarmuka. Ini beberapa hal yang pernah saya kerjakan di sekolah dan di waktu luang.</Text>
-          <View style={styles.availabilityRow}><Animated.View style={[styles.statusDot, { opacity: statusPulse }]} /><Text style={styles.availability}>AVAILABLE TO LEARN</Text></View>
+          <View style={styles.availabilityRow}><Animated.View style={[styles.statusDot, { opacity: statusPulse }]} /><Text style={styles.availability}>SEDANG BELAJAR</Text></View>
         </View>
         <View style={[styles.heroVisual, !isWideScreen && styles.heroVisualSmall]}>
           <Animated.View style={[styles.avatarFrame, { transform: [{ scale: pageMotion.interpolate({ inputRange: [0, 1], outputRange: [0.94, 1] }) }] }]}>
@@ -62,50 +68,50 @@ export default function Home() {
       </View>
       </View>
 
-      <View style={[styles.infoSection, !isWideScreen && styles.infoSectionSmall]}>
+      <Animated.View style={[styles.infoSection, !isWideScreen && styles.infoSectionSmall, { opacity: scrollMotion.interpolate({ inputRange: [120, 260], outputRange: [0.35, 1], extrapolate: 'clamp' }), transform: [{ translateY: scrollMotion.interpolate({ inputRange: [120, 260], outputRange: [28, 0], extrapolate: 'clamp' }) }] }]}>
       <View style={[styles.infoGrid, !isWideScreen && styles.infoGridSmall]}>
         <View style={styles.infoBlock}>
-          <Text style={styles.sectionKicker}>EDUCATION</Text>
+          <Text style={styles.sectionKicker}>PENDIDIKAN</Text>
           <Text style={styles.infoTitle}>SMK Negeri 10 Jakarta</Text>
           <Text style={styles.cardText}>Pelajar yang sedang memperdalam frontend, aplikasi mobile, dan desain UI/UX.</Text>
         </View>
         <View style={styles.infoBlock}>
-          <Text style={styles.sectionKicker}>WHAT I DO</Text>
+          <Text style={styles.sectionKicker}>YANG SAYA KERJAKAN</Text>
           <Text style={styles.infoTitle}>Proyek sekolah dan personal</Text>
           <Text style={styles.cardText}>Mencoba membuat desain di Figma, aplikasi Android dengan Java/Kotlin, dan latihan web dengan JavaScript serta React Native.</Text>
         </View>
       </View>
-      </View>
+      </Animated.View>
 
-      <View style={[styles.section, styles.skillsSection]}>
-        <Text style={styles.sectionKicker}>SKILLS</Text>
+      <Animated.View style={[styles.section, styles.skillsSection, { opacity: scrollMotion.interpolate({ inputRange: [300, 460], outputRange: [0.35, 1], extrapolate: 'clamp' }), transform: [{ translateY: scrollMotion.interpolate({ inputRange: [300, 460], outputRange: [28, 0], extrapolate: 'clamp' }) }] }]}>
+        <Text style={styles.sectionKicker}>KEAHLIAN</Text>
         <Text style={styles.cardTitle}>Hal yang sedang saya pelajari.</Text>
         <View style={styles.skillContainer}>{['UI/UX Design', 'JavaScript', 'React Native', 'Kotlin', 'CSS', 'Git dasar', 'Problem Solving'].map((skill) => <Text key={skill} style={styles.badge}>{skill}</Text>)}</View>
-      </View>
+      </Animated.View>
 
-      <View style={styles.projectsSection}>
-        <View style={styles.sectionHeader}><Text style={styles.sectionKicker}>SELECTED WORKS</Text><Text style={styles.sectionTitle}>Proyek yang pernah saya coba.</Text></View>
+      <Animated.View style={[styles.projectsSection, { opacity: scrollMotion.interpolate({ inputRange: [500, 680], outputRange: [0.35, 1], extrapolate: 'clamp' }), transform: [{ translateY: scrollMotion.interpolate({ inputRange: [500, 680], outputRange: [28, 0], extrapolate: 'clamp' }) }] }]}>
+        <View style={styles.sectionHeader}><Text style={styles.sectionKicker}>KARYA PILIHAN</Text><Text style={styles.sectionTitle}>Proyek yang pernah saya coba.</Text></View>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.projectList}>
-          {projects.map((item) => <View key={item.id} style={[styles.projectCard, isWideScreen && styles.projectCardWide]}>
+          {projects.map((item) => <Pressable key={item.id} style={[styles.projectCard, isWideScreen && styles.projectCardWide]}>
             <Image source={item.image} style={[styles.projectImage, { aspectRatio: item.aspectRatio }]} resizeMode="contain" />
             <View style={styles.projectBody}><Text style={styles.projectCategory}>{item.category}</Text><Text style={styles.projectTitle}>{item.title}</Text><Text style={styles.projectDescription}>{item.description}</Text><Text style={styles.projectNote}>{item.note}</Text></View>
-          </View>)}
+          </Pressable>)}
         </ScrollView>
-      </View>
+      </Animated.View>
 
-      <View style={styles.contactSection}>
-        <Text style={styles.sectionKicker}>GET IN TOUCH</Text>
+      <Animated.View style={[styles.contactSection, { opacity: scrollMotion.interpolate({ inputRange: [760, 920], outputRange: [0.35, 1], extrapolate: 'clamp' }), transform: [{ translateY: scrollMotion.interpolate({ inputRange: [760, 920], outputRange: [28, 0], extrapolate: 'clamp' }) }] }]}>
+        <Text style={styles.sectionKicker}>KONTAK</Text>
         <Pressable onPress={() => Linking.openURL('https://wa.me/6288291572296')}>
           <Text style={styles.contactLink}>WhatsApp: 0882 9157 2296</Text>
         </Pressable>
         <Pressable onPress={() => Linking.openURL('https://github.com/rcahyakirani-cyber')}>
           <Text style={styles.contactLink}>GitHub: github.com/rcahyakirani-cyber</Text>
         </Pressable>
-      </View>
+      </Animated.View>
 
       </Animated.View>
 
-    </ScrollView>
+    </Animated.ScrollView>
   );
 }
 
