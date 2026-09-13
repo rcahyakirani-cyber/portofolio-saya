@@ -1,4 +1,4 @@
-import { Image, ImageSourcePropType, ScrollView, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
+import { Image, ImageSourcePropType, Linking, Pressable, ScrollView, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
 
 const gambar1 = require('../../assets/images/proyek1.png');
 const gambar2 = require('../../assets/images/proyek2.png');
@@ -79,6 +79,18 @@ export default function Home() {
         </ScrollView>
       </View>
 
+      <View style={styles.contactSection}>
+        <Text style={styles.sectionKicker}>CONTACT</Text>
+        <Text style={styles.contactTitle}>Mari terhubung.</Text>
+        <Text style={styles.contactText}>Kalau ingin bertanya atau melihat project lainnya, bisa hubungi saya melalui:</Text>
+        <Pressable onPress={() => Linking.openURL('https://wa.me/6288291572296')}>
+          <Text style={styles.contactLink}>WhatsApp: 0882 9157 2296</Text>
+        </Pressable>
+        <Pressable onPress={() => Linking.openURL('https://github.com/rcahyakirani-cyber')}>
+          <Text style={styles.contactLink}>GitHub: github.com/rcahyakirani-cyber</Text>
+        </Pressable>
+      </View>
+
     </ScrollView>
   );
 }
@@ -141,4 +153,8 @@ const styles = StyleSheet.create({
   projectTitle: { fontSize: 26, lineHeight: 32, color: '#f4f8fc', fontWeight: '800', marginBottom: 9 },
   projectDescription: { fontSize: 17, color: '#d9e8f5', lineHeight: 26, marginBottom: 16 },
   projectNote: { fontSize: 15, color: '#a9c7dc', lineHeight: 22, fontStyle: 'italic' },
+  contactSection: { backgroundColor: '#071426', paddingVertical: 68, paddingHorizontal: '10%' },
+  contactTitle: { color: '#f4f8fc', fontSize: 32, lineHeight: 39, fontWeight: '800', marginBottom: 12 },
+  contactText: { color: '#d9e8f5', fontSize: 17, lineHeight: 26, maxWidth: 620, marginBottom: 14 },
+  contactLink: { color: '#8fc4e8', fontSize: 18, lineHeight: 31, fontWeight: '700' },
 });
