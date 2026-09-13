@@ -67,12 +67,12 @@ export default function Home() {
 
       <View>
         <View style={styles.sectionHeader}><Text style={styles.sectionKicker}>MY PROJECTS</Text><Text style={styles.sectionTitle}>Beberapa karya yang pernah saya buat.</Text></View>
-        <View style={styles.projectGrid}>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.projectList}>
           {projects.map((item) => <View key={item.id} style={[styles.projectCard, isWideScreen && styles.projectCardWide]}>
             <Image source={item.image} style={[styles.projectImage, { aspectRatio: item.aspectRatio }]} resizeMode="contain" />
             <View style={styles.projectBody}><Text style={styles.projectCategory}>{item.category}</Text><Text style={styles.projectTitle}>{item.title}</Text><Text style={styles.projectDescription}>{item.description}</Text><Text style={styles.projectNote}>{item.note}</Text></View>
           </View>)}
-        </View>
+        </ScrollView>
       </View>
 
     </ScrollView>
@@ -119,13 +119,13 @@ const styles = StyleSheet.create({
   badge: { color: '#743445', paddingBottom: 6, borderBottomWidth: 1, borderBottomColor: '#b88788', fontSize: 14, fontWeight: '700' },
   sectionHeader: { marginBottom: 22 },
   sectionTitle: { fontSize: 25, lineHeight: 31, color: '#4a3034', fontWeight: '800' },
-  projectGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 20 },
-  projectCard: { width: '100%', overflow: 'hidden', marginBottom: 12, backgroundColor: '#eadccd', borderRadius: 8, padding: 12 },
-  projectCardWide: { width: '47%' },
-  projectImage: { width: '100%', height: 190, backgroundColor: '#d2bbaa', borderRadius: 5 },
-  projectBody: { paddingTop: 14 },
-  projectCategory: { color: '#843b4d', fontSize: 10, letterSpacing: 1.2, fontWeight: '800', marginBottom: 7 },
-  projectTitle: { fontSize: 21, color: '#4a3034', fontWeight: '800', marginBottom: 7 },
-  projectDescription: { fontSize: 14, color: '#684f4b', lineHeight: 21, marginBottom: 15 },
-  projectNote: { fontSize: 13, color: '#8a6d68', lineHeight: 19, fontStyle: 'italic' },
+  projectList: { gap: 22, paddingRight: 24 },
+  projectCard: { width: 310, overflow: 'hidden', marginBottom: 12, backgroundColor: '#eadccd', borderRadius: 8, padding: 14 },
+  projectCardWide: { width: 390 },
+  projectImage: { width: '100%', height: 245, backgroundColor: '#d2bbaa', borderRadius: 5 },
+  projectBody: { paddingTop: 16 },
+  projectCategory: { color: '#843b4d', fontSize: 11, letterSpacing: 1.2, fontWeight: '800', marginBottom: 8 },
+  projectTitle: { fontSize: 24, lineHeight: 29, color: '#4a3034', fontWeight: '800', marginBottom: 9 },
+  projectDescription: { fontSize: 15, color: '#684f4b', lineHeight: 23, marginBottom: 16 },
+  projectNote: { fontSize: 14, color: '#8a6d68', lineHeight: 20, fontStyle: 'italic' },
 });
