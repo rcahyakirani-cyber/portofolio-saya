@@ -28,21 +28,22 @@ export default function Home() {
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
       <View style={styles.header}>
-        <View style={styles.identityBlock}>
+        <View style={styles.heroCopy}>
+          <Text style={styles.eyebrow}>PORTOFOLIO SAYA</Text>
+          <Text style={styles.heroTitle}>Halo, saya{'\n'}<Text style={styles.heroName}>Raisyah Cahya Kirani.</Text></Text>
+          <Text style={styles.title}>Pelajar SMK yang sedang belajar frontend, aplikasi mobile, dan UI/UX.</Text>
+          <View style={styles.availabilityRow}><View style={styles.statusDot} /><Text style={styles.availability}>Terbuka untuk belajar dan bekerja sama</Text></View>
+        </View>
+        <View style={styles.heroVisual}>
           <View style={styles.avatarFrame}>
             <Image source={fotoProfil} style={styles.avatarImage} resizeMode="cover" />
           </View>
-          <View style={styles.headerCopy}>
-            <Text style={styles.name}>Raisyah Cahya Kirani</Text>
-            <Text style={styles.title}>Frontend Developer dan UI/UX Designer</Text>
-            <View style={styles.availabilityRow}><View style={styles.statusDot} /><Text style={styles.availability}>Pelajar SMK NEGERI 10 Jakarta</Text></View>
-          </View>
         </View>
-        <Text style={styles.intro}>Fokus membangun solusi digital yang fungsional dan mudah digunakan.</Text>
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.cardTitle}>Tentang saya</Text>
+        <Text style={styles.sectionKicker}>TENTANG SAYA</Text>
+        <Text style={styles.cardTitle}>Membuat sesuatu sambil terus belajar.</Text>
         <Text style={styles.cardText}>Saya Raisyah Cahya Kirani, pelajar yang memiliki minat pada pengembangan aplikasi mobile dan web, frontend, dan desain UI/UX. Saya senang mengubah ide menjadi tampilan yang terstruktur serta terus belajar melalui proyek nyata.</Text>
         <View style={styles.detailGrid}>
           <View style={styles.detailItem}><Text style={styles.detailLabel}>Fokus</Text><Text style={styles.detailValue}>Mobile dan Web</Text></View>
@@ -57,18 +58,20 @@ export default function Home() {
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.cardTitle}>Pengalaman</Text>
+        <Text style={styles.sectionKicker}>YANG SAYA KERJAKAN</Text>
+        <Text style={styles.cardTitle}>Belajar lewat proyek sekolah dan personal.</Text>
         <View style={styles.timelineItem}><View style={styles.timelineLine} /><View style={styles.timelineContent}><Text style={styles.timelinePeriod}>PROYEK SEKOLAH & PERSONAL</Text><Text style={styles.timelineTitle}>Pengembangan aplikasi dan desain digital</Text><Text style={styles.cardText}>Merancang UI/UX di Figma, membuat aplikasi Android dengan Java/Kotlin, serta membangun proyek interaktif menggunakan JavaScript dan React Native/Expo dan Node.js.</Text></View></View>
         <View style={styles.timelineItem}><View style={styles.timelineLine} /><View style={styles.timelineContent}><Text style={styles.timelinePeriod}>TARGET PKL</Text><Text style={styles.timelineTitle}>Ruang kolaborasi untuk terus belajar dan berkembang</Text><Text style={styles.cardText}>Siap menerima arahan, bekerja kolaboratif, dan mengembangkan kebiasaan kerja yang teliti selama praktik kerja lapangan.</Text></View></View>
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.cardTitle}>Keahlian</Text>
+        <Text style={styles.sectionKicker}>TOOLS DAN KEAHLIAN</Text>
+        <Text style={styles.cardTitle}>Hal-hal yang sedang saya pelajari.</Text>
         <View style={styles.skillContainer}>{['UI/UX Design', 'JavaScript', 'React Native', 'Kotlin', 'CSS', 'Git dasar', 'Problem Solving'].map((skill) => <Text key={skill} style={styles.badge}>{skill}</Text>)}</View>
       </View>
 
       <View>
-        <View style={styles.sectionHeader}><Text style={styles.sectionTitle}>Proyek yang pernah dibuat</Text></View>
+        <View style={styles.sectionHeader}><Text style={styles.sectionKicker}>PROYEK PILIHAN</Text><Text style={styles.sectionTitle}>Beberapa karya yang pernah saya buat.</Text></View>
         {projects.map((item) => <View key={item.id} style={styles.projectCard}>
           <Image source={item.image} style={[styles.projectImage, { aspectRatio: item.aspectRatio }]} resizeMode="contain" />
           <View style={styles.projectBody}><Text style={styles.projectCategory}>{item.category}</Text><Text style={styles.projectTitle}>{item.title}</Text><Text style={styles.projectDescription}>{item.description}</Text></View>
@@ -80,42 +83,44 @@ export default function Home() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#eef5ef' },
-  content: { padding: 22, paddingBottom: 48, maxWidth: 720, alignSelf: 'center', width: '100%' },
-  header: { marginBottom: 28 },
-  identityBlock: { flexDirection: 'row', alignItems: 'flex-start', gap: 18 },
-  avatarFrame: { width: 106, height: 122, padding: 5, overflow: 'hidden', borderRadius: 58, borderWidth: 1, borderColor: '#9db5a1', backgroundColor: '#dce9de' },
-  avatarImage: { width: 96, height: 112, backgroundColor: '#dce9de', borderRadius: 52, transform: [{ scale: 1.35 }, { translateY: -8 }] },
-  headerCopy: { flex: 1, minWidth: 0, paddingTop: 4 },
-  name: { fontSize: 29, fontWeight: '800', color: '#20352a', marginBottom: 5 },
-  title: { fontSize: 13, color: '#607b68', fontWeight: '600' },
+  container: { flex: 1, backgroundColor: '#252223' },
+  content: { padding: 28, paddingBottom: 64, maxWidth: 980, alignSelf: 'center', width: '100%' },
+  header: { flexDirection: 'row', alignItems: 'center', gap: 34, minHeight: 390, marginBottom: 44 },
+  heroCopy: { flex: 1, minWidth: 0 },
+  heroVisual: { width: 270, alignItems: 'center' },
+  eyebrow: { color: '#d9a6a0', fontSize: 11, letterSpacing: 2, fontWeight: '800', marginBottom: 22 },
+  heroTitle: { color: '#f5ebe7', fontSize: 42, lineHeight: 47, fontWeight: '400', marginBottom: 20 },
+  heroName: { color: '#d9a6a0', fontWeight: '800' },
+  avatarFrame: { width: 238, height: 292, padding: 7, overflow: 'hidden', borderRadius: 120, borderWidth: 1, borderColor: '#9c5660', backgroundColor: '#3a292b' },
+  avatarImage: { width: 222, height: 278, backgroundColor: '#3a292b', borderRadius: 112, transform: [{ scale: 1.35 }, { translateY: -8 }] },
+  title: { fontSize: 16, lineHeight: 24, color: '#cbb9b5', fontWeight: '600', maxWidth: 430 },
   availabilityRow: { flexDirection: 'row', alignItems: 'center', marginTop: 13, gap: 7 },
-  statusDot: { width: 7, height: 7, borderRadius: 4, backgroundColor: '#4dc995' },
-  availability: { fontSize: 10, color: '#5d8968', fontWeight: '700' },
-  intro: { color: '#6d8573', fontSize: 15, lineHeight: 23, marginTop: 22, maxWidth: 600 },
-  section: { borderTopWidth: 1, borderTopColor: '#c5d8c8', paddingTop: 22, marginTop: 18, marginBottom: 18 },
-  cardTitle: { fontSize: 24, lineHeight: 30, color: '#20352a', fontWeight: '800', marginBottom: 14 },
-  cardText: { fontSize: 14, color: '#607b68', lineHeight: 23 },
-  detailGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 24, borderTopWidth: 1, borderTopColor: '#c5d8c8', marginTop: 26, paddingTop: 18 },
+  statusDot: { width: 7, height: 7, borderRadius: 4, backgroundColor: '#d9a6a0' },
+  availability: { fontSize: 11, color: '#d9a6a0', fontWeight: '700' },
+  section: { borderTopWidth: 1, borderTopColor: '#594448', paddingTop: 25, marginTop: 22, marginBottom: 28 },
+  sectionKicker: { color: '#d9a6a0', fontSize: 10, letterSpacing: 1.8, fontWeight: '800', marginBottom: 10 },
+  cardTitle: { fontSize: 27, lineHeight: 33, color: '#f5ebe7', fontWeight: '800', marginBottom: 14, maxWidth: 620 },
+  cardText: { fontSize: 15, color: '#cbb9b5', lineHeight: 24, maxWidth: 680 },
+  detailGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 34, borderTopWidth: 1, borderTopColor: '#594448', marginTop: 26, paddingTop: 18 },
   detailItem: { minWidth: 100 },
-  detailLabel: { fontSize: 10, color: '#78917e', fontWeight: '800', marginBottom: 5 },
-  detailValue: { color: '#34553e', fontSize: 13, fontWeight: '700' },
-  contactBlock: { borderTopWidth: 1, borderTopColor: '#c5d8c8', marginTop: 26, paddingTop: 18 },
-  phoneNumber: { color: '#557f60', fontSize: 20, fontWeight: '800', letterSpacing: 0.5, marginTop: 4 },
-  copyHint: { color: '#78917e', fontSize: 11, marginTop: 5 },
+  detailLabel: { fontSize: 10, color: '#a98c8a', fontWeight: '800', marginBottom: 5 },
+  detailValue: { color: '#f0dfda', fontSize: 14, fontWeight: '700' },
+  contactBlock: { borderTopWidth: 1, borderTopColor: '#594448', marginTop: 26, paddingTop: 18 },
+  phoneNumber: { color: '#e2b5ad', fontSize: 20, fontWeight: '800', letterSpacing: 0.5, marginTop: 4 },
+  copyHint: { color: '#a98c8a', fontSize: 11, marginTop: 5 },
   timelineItem: { flexDirection: 'row', marginTop: 7, minHeight: 100 },
-  timelineLine: { width: 2, backgroundColor: '#8eae95', marginRight: 16, marginVertical: 4 },
+  timelineLine: { width: 2, backgroundColor: '#9c5660', marginRight: 16, marginVertical: 4 },
   timelineContent: { flex: 1, paddingBottom: 16 },
-  timelinePeriod: { color: '#668a6e', fontSize: 10, fontWeight: '800', marginBottom: 6 },
-  timelineTitle: { color: '#34553e', fontSize: 16, fontWeight: '700', marginBottom: 6 },
+  timelinePeriod: { color: '#d9a6a0', fontSize: 10, fontWeight: '800', marginBottom: 6 },
+  timelineTitle: { color: '#f0dfda', fontSize: 17, fontWeight: '700', marginBottom: 6 },
   skillContainer: { flexDirection: 'row', flexWrap: 'wrap', columnGap: 20, rowGap: 12 },
-  badge: { color: '#557f60', paddingBottom: 5, borderBottomWidth: 1, borderBottomColor: '#9db5a1', fontSize: 13, fontWeight: '700' },
+  badge: { color: '#e2b5ad', paddingBottom: 6, borderBottomWidth: 1, borderBottomColor: '#9c5660', fontSize: 14, fontWeight: '700' },
   sectionHeader: { marginBottom: 22 },
-  sectionTitle: { fontSize: 22, color: '#20352a', fontWeight: '800' },
-  projectCard: { overflow: 'hidden', marginBottom: 30 },
-  projectImage: { width: '100%', maxHeight: 460, backgroundColor: '#dfece1', borderRadius: 10 },
-  projectBody: { paddingTop: 14 },
-  projectCategory: { color: '#668a6e', fontSize: 10, fontWeight: '800', marginBottom: 7 },
-  projectTitle: { fontSize: 19, color: '#20352a', fontWeight: '800', marginBottom: 7 },
-  projectDescription: { fontSize: 14, color: '#607b68', lineHeight: 21, marginBottom: 15 },
+  sectionTitle: { fontSize: 29, lineHeight: 35, color: '#f5ebe7', fontWeight: '800' },
+  projectCard: { flexDirection: 'row', gap: 22, overflow: 'hidden', marginBottom: 28, paddingBottom: 24, borderBottomWidth: 1, borderBottomColor: '#594448' },
+  projectImage: { width: '42%', minHeight: 150, backgroundColor: '#382b2d', borderRadius: 8 },
+  projectBody: { flex: 1, paddingTop: 4 },
+  projectCategory: { color: '#d9a6a0', fontSize: 10, letterSpacing: 1.2, fontWeight: '800', marginBottom: 7 },
+  projectTitle: { fontSize: 21, color: '#f5ebe7', fontWeight: '800', marginBottom: 7 },
+  projectDescription: { fontSize: 14, color: '#cbb9b5', lineHeight: 21, marginBottom: 15 },
 });
