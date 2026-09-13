@@ -34,11 +34,11 @@ export default function Home() {
       <View style={[styles.heroSection, !isWideScreen && styles.heroSectionSmall]}>
       <View style={[styles.header, !isWideScreen && styles.headerSmall]}>
         <View style={[styles.heroCopy, !isWideScreen && styles.heroCopySmall]}>
-          <Text style={styles.sectionKicker}>INTRODUCTION</Text>
+          <Text style={styles.sectionKicker}>Halo, ini portfolio saya</Text>
           <Text style={[styles.name, !isWideScreen && styles.nameSmall]}>Raisyah Cahya Kirani</Text>
           <Text style={styles.title}>Pelajar SMK Negeri 10 Jakarta</Text>
           <Text style={styles.intro}>Saya sedang belajar membuat website, aplikasi, dan desain antarmuka. Ini beberapa hal yang pernah saya kerjakan di sekolah dan di waktu luang.</Text>
-          <View style={styles.availabilityRow}><View style={styles.statusDot} /><Text style={styles.availability}>Terbuka untuk belajar</Text></View>
+          <View style={styles.availabilityRow}><View style={styles.statusDot} /><Text style={styles.availability}>Sedang terus belajar</Text></View>
         </View>
         <View style={[styles.heroVisual, !isWideScreen && styles.heroVisualSmall]}>
           <View style={styles.avatarFrame}>
@@ -51,12 +51,12 @@ export default function Home() {
       <View style={[styles.infoSection, !isWideScreen && styles.infoSectionSmall]}>
       <View style={[styles.infoGrid, !isWideScreen && styles.infoGridSmall]}>
         <View style={styles.infoBlock}>
-          <Text style={styles.sectionKicker}>EDUCATION</Text>
+          <Text style={styles.sectionKicker}>Sekolah</Text>
           <Text style={styles.infoTitle}>SMK Negeri 10 Jakarta</Text>
           <Text style={styles.cardText}>Pelajar yang sedang memperdalam frontend, aplikasi mobile, dan desain UI/UX.</Text>
         </View>
         <View style={styles.infoBlock}>
-          <Text style={styles.sectionKicker}>EXPERIENCE</Text>
+          <Text style={styles.sectionKicker}>Pengalaman</Text>
           <Text style={styles.infoTitle}>Proyek sekolah dan personal</Text>
           <Text style={styles.cardText}>Mencoba membuat desain di Figma, aplikasi Android dengan Java/Kotlin, dan latihan web dengan JavaScript serta React Native.</Text>
         </View>
@@ -64,13 +64,13 @@ export default function Home() {
       </View>
 
       <View style={[styles.section, styles.skillsSection]}>
-        <Text style={styles.sectionKicker}>SKILLS</Text>
-        <Text style={styles.cardTitle}>Yang sedang dipelajari</Text>
+        <Text style={styles.sectionKicker}>Yang sedang saya pelajari</Text>
+        <Text style={styles.cardTitle}>Sedikit demi sedikit, saya coba pahami.</Text>
         <View style={styles.skillContainer}>{['UI/UX Design', 'JavaScript', 'React Native', 'Kotlin', 'CSS', 'Git dasar', 'Problem Solving'].map((skill) => <Text key={skill} style={styles.badge}>{skill}</Text>)}</View>
       </View>
 
       <View style={styles.projectsSection}>
-        <View style={styles.sectionHeader}><Text style={styles.sectionKicker}>MY PROJECTS</Text><Text style={styles.sectionTitle}>Beberapa karya yang pernah saya buat.</Text></View>
+        <View style={styles.sectionHeader}><Text style={styles.sectionKicker}>Kumpulan proyek</Text><Text style={styles.sectionTitle}>Hal-hal yang pernah saya coba.</Text></View>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.projectList}>
           {projects.map((item) => <View key={item.id} style={[styles.projectCard, isWideScreen && styles.projectCardWide]}>
             <Image source={item.image} style={[styles.projectImage, { aspectRatio: item.aspectRatio }]} resizeMode="contain" />
@@ -80,9 +80,6 @@ export default function Home() {
       </View>
 
       <View style={styles.contactSection}>
-        <Text style={styles.sectionKicker}>CONTACT</Text>
-        <Text style={styles.contactTitle}>Mari terhubung.</Text>
-        <Text style={styles.contactText}>Kalau ingin bertanya atau melihat project lainnya, bisa hubungi saya melalui:</Text>
         <Pressable onPress={() => Linking.openURL('https://wa.me/6288291572296')}>
           <Text style={styles.contactLink}>WhatsApp: 0882 9157 2296</Text>
         </Pressable>
@@ -107,7 +104,7 @@ const styles = StyleSheet.create({
   heroCopySmall: { width: '100%' },
   heroVisual: { width: 300, alignItems: 'center' },
   heroVisualSmall: { width: '100%', alignItems: 'center' },
-  name: { fontSize: 56, lineHeight: 62, color: '#ffffff', fontWeight: '900', marginBottom: 10, maxWidth: 700 },
+  name: { fontFamily: 'Georgia', fontSize: 56, lineHeight: 62, color: '#ffffff', fontWeight: '700', marginBottom: 10, maxWidth: 700 },
   nameSmall: { fontSize: 38, lineHeight: 44 },
   intro: { color: '#d9e8f5', fontSize: 20, lineHeight: 30, maxWidth: 650, marginTop: 18 },
   avatarFrame: { width: 260, height: 330, padding: 8, overflow: 'hidden', borderRadius: 132, borderWidth: 2, borderColor: '#4a91c7', backgroundColor: '#163052' },
@@ -121,12 +118,12 @@ const styles = StyleSheet.create({
   infoGrid: { flexDirection: 'row', gap: 54 },
   infoGridSmall: { flexDirection: 'column', gap: 28 },
   infoBlock: { flex: 1 },
-  infoTitle: { color: '#f4f8fc', fontSize: 23, fontWeight: '800', marginBottom: 10 },
+  infoTitle: { fontFamily: 'Georgia', color: '#f4f8fc', fontSize: 23, fontWeight: '700', marginBottom: 10 },
   section: { paddingVertical: 62, paddingHorizontal: '10%', marginTop: 0, marginBottom: 0, backgroundColor: '#071426' },
   skillsSection: { backgroundColor: '#071426' },
   sectionKicker: { color: '#73b9e8', fontSize: 13, letterSpacing: 1.6, fontWeight: '800', marginBottom: 11 },
-  cardTitle: { fontSize: 31, lineHeight: 38, color: '#f4f8fc', fontWeight: '800', marginBottom: 17, maxWidth: 760 },
-  cardText: { fontSize: 17, color: '#d9e8f5', lineHeight: 28, maxWidth: 760 },
+  cardTitle: { fontFamily: 'Georgia', fontSize: 31, lineHeight: 38, color: '#f4f8fc', fontWeight: '700', marginBottom: 17, maxWidth: 760 },
+  cardText: { fontFamily: 'Arial', fontSize: 17, color: '#d9e8f5', lineHeight: 28, maxWidth: 760 },
   detailGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 34, marginTop: 24, paddingTop: 10 },
   detailItem: { minWidth: 100 },
   detailLabel: { fontSize: 12, color: '#8fc4e8', fontWeight: '800', marginBottom: 6 },
@@ -143,15 +140,15 @@ const styles = StyleSheet.create({
   badge: { color: '#b9ddf4', paddingBottom: 7, borderBottomWidth: 1, borderBottomColor: '#4a91c7', fontSize: 17, fontWeight: '700' },
   projectsSection: { backgroundColor: '#0d2745', paddingVertical: 62, paddingHorizontal: '10%' },
   sectionHeader: { marginBottom: 26 },
-  sectionTitle: { fontSize: 32, lineHeight: 39, color: '#f4f8fc', fontWeight: '800' },
+  sectionTitle: { fontFamily: 'Georgia', fontSize: 32, lineHeight: 39, color: '#f4f8fc', fontWeight: '700' },
   projectList: { gap: 26, paddingRight: 24 },
   projectCard: { width: 330, overflow: 'hidden', marginBottom: 12, backgroundColor: '#153557', borderRadius: 10, padding: 16 },
   projectCardWide: { width: 430 },
   projectImage: { width: '100%', height: 270, backgroundColor: '#102942', borderRadius: 6 },
   projectBody: { paddingTop: 16 },
   projectCategory: { color: '#8fc4e8', fontSize: 13, letterSpacing: 1, fontWeight: '800', marginBottom: 9 },
-  projectTitle: { fontSize: 26, lineHeight: 32, color: '#f4f8fc', fontWeight: '800', marginBottom: 9 },
-  projectDescription: { fontSize: 17, color: '#d9e8f5', lineHeight: 26, marginBottom: 16 },
+  projectTitle: { fontFamily: 'Georgia', fontSize: 26, lineHeight: 32, color: '#f4f8fc', fontWeight: '700', marginBottom: 9 },
+  projectDescription: { fontFamily: 'Arial', fontSize: 17, color: '#d9e8f5', lineHeight: 26, marginBottom: 16 },
   projectNote: { fontSize: 15, color: '#a9c7dc', lineHeight: 22, fontStyle: 'italic' },
   contactSection: { backgroundColor: '#071426', paddingVertical: 68, paddingHorizontal: '10%' },
   contactTitle: { color: '#f4f8fc', fontSize: 32, lineHeight: 39, fontWeight: '800', marginBottom: 12 },
