@@ -33,6 +33,7 @@ export default function Home() {
     <ScrollView style={styles.container} contentContainerStyle={[styles.content, !isWideScreen && styles.contentSmall]} showsVerticalScrollIndicator={false}>
       <View style={[styles.header, !isWideScreen && styles.headerSmall]}>
         <View style={[styles.heroCopy, !isWideScreen && styles.heroCopySmall]}>
+          <Text style={styles.sectionKicker}>INTRODUCTION</Text>
           <Text style={styles.name}>Raisyah Cahya Kirani</Text>
           <Text style={styles.title}>Pelajar SMK Negeri 10 Jakarta</Text>
           <Text style={styles.intro}>Saya sedang belajar membuat website, aplikasi, dan desain antarmuka. Ini beberapa hal yang pernah saya kerjakan di sekolah dan di waktu luang.</Text>
@@ -45,34 +46,27 @@ export default function Home() {
         </View>
       </View>
 
-      <View style={styles.section}>
-        <Text style={styles.cardTitle}>Tentang saya</Text>
-        <Text style={styles.cardText}>Saya tertarik dengan frontend, aplikasi mobile, dan UI/UX. Sebagian besar proyek di sini dibuat untuk tugas sekolah, latihan, atau mencoba hal baru.</Text>
-        <View style={styles.detailGrid}>
-          <View style={styles.detailItem}><Text style={styles.detailLabel}>Fokus</Text><Text style={styles.detailValue}>Mobile dan Web</Text></View>
-          <View style={styles.detailItem}><Text style={styles.detailLabel}>Domisili</Text><Text style={styles.detailValue}>Jakarta</Text></View>
-          <View style={styles.detailItem}><Text style={styles.detailLabel}>Status</Text><Text style={styles.detailValue}>Pelajar</Text></View>
+      <View style={[styles.infoGrid, !isWideScreen && styles.infoGridSmall]}>
+        <View style={styles.infoBlock}>
+          <Text style={styles.sectionKicker}>EDUCATION</Text>
+          <Text style={styles.infoTitle}>SMK Negeri 10 Jakarta</Text>
+          <Text style={styles.cardText}>Pelajar yang sedang memperdalam frontend, aplikasi mobile, dan desain UI/UX.</Text>
         </View>
-        <View style={styles.contactBlock}>
-          <Text style={styles.detailLabel}>Kontak</Text>
-          <Text style={styles.phoneNumber} selectable>+62 882-9157-2296</Text>
-          <Text style={styles.copyHint}>Tekan lama nomor untuk menyalin</Text>
+        <View style={styles.infoBlock}>
+          <Text style={styles.sectionKicker}>EXPERIENCE</Text>
+          <Text style={styles.infoTitle}>Proyek sekolah dan personal</Text>
+          <Text style={styles.cardText}>Mencoba membuat desain di Figma, aplikasi Android dengan Java/Kotlin, dan latihan web dengan JavaScript serta React Native.</Text>
         </View>
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.cardTitle}>Pengalaman belajar</Text>
-        <View style={styles.timelineItem}><View style={styles.timelineLine} /><View style={styles.timelineContent}><Text style={styles.timelinePeriod}>YANG SUDAH DICOBA</Text><Text style={styles.timelineTitle}>Membuat tampilan dan aplikasi dari nol</Text><Text style={styles.cardText}>Saya pernah mengerjakan desain di Figma, aplikasi Android dengan Java/Kotlin, dan beberapa latihan web memakai JavaScript, React Native, Expo, serta Node.js.</Text></View></View>
-        <View style={styles.timelineItem}><View style={styles.timelineLine} /><View style={styles.timelineContent}><Text style={styles.timelinePeriod}>BAGIAN YANG MASIH DIPELAJARI</Text><Text style={styles.timelineTitle}>Merapikan kode dan membuat tampilan lebih nyaman</Text><Text style={styles.cardText}>Saya masih belajar membagi pekerjaan menjadi langkah kecil, mencari penyebab error, dan meminta masukan supaya hasilnya tidak hanya terlihat bagus tetapi juga bisa dipakai.</Text></View></View>
-      </View>
-
-      <View style={styles.section}>
+        <Text style={styles.sectionKicker}>SKILLS</Text>
         <Text style={styles.cardTitle}>Yang sedang dipelajari</Text>
         <View style={styles.skillContainer}>{['UI/UX Design', 'JavaScript', 'React Native', 'Kotlin', 'CSS', 'Git dasar', 'Problem Solving'].map((skill) => <Text key={skill} style={styles.badge}>{skill}</Text>)}</View>
       </View>
 
       <View>
-        <View style={styles.sectionHeader}><Text style={styles.sectionTitle}>Proyek saya</Text></View>
+        <View style={styles.sectionHeader}><Text style={styles.sectionKicker}>MY PROJECTS</Text><Text style={styles.sectionTitle}>Beberapa karya yang pernah saya buat.</Text></View>
         <View style={styles.projectGrid}>
           {projects.map((item) => <View key={item.id} style={[styles.projectCard, isWideScreen && styles.projectCardWide]}>
             <Image source={item.image} style={[styles.projectImage, { aspectRatio: item.aspectRatio }]} resizeMode="contain" />
@@ -105,6 +99,10 @@ const styles = StyleSheet.create({
   sectionKicker: { color: '#843b4d', fontSize: 10, letterSpacing: 1.5, fontWeight: '800', marginBottom: 8 },
   cardTitle: { fontSize: 23, lineHeight: 29, color: '#4a3034', fontWeight: '800', marginBottom: 14, maxWidth: 620 },
   cardText: { fontSize: 15, color: '#684f4b', lineHeight: 24, maxWidth: 680 },
+  infoGrid: { flexDirection: 'row', gap: 32, marginTop: 12, marginBottom: 12 },
+  infoGridSmall: { flexDirection: 'column', gap: 8 },
+  infoBlock: { flex: 1, paddingVertical: 10 },
+  infoTitle: { color: '#5b3e42', fontSize: 17, fontWeight: '800', marginBottom: 8 },
   detailGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 34, marginTop: 24, paddingTop: 10 },
   detailItem: { minWidth: 100 },
   detailLabel: { fontSize: 10, color: '#8b6560', fontWeight: '800', marginBottom: 5 },
