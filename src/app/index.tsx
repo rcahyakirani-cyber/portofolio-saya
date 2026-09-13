@@ -12,16 +12,17 @@ interface Project {
   title: string;
   category: string;
   description: string;
+  note: string;
   image: ImageSourcePropType;
   aspectRatio: number;
 }
 
 const projects: Project[] = [
-  { id: 1, title: 'Desain Aplikasi Instagram', category: 'UI/UX DESIGN', description: 'Eksplorasi desain antarmuka dan pengalaman pengguna aplikasi sosial media menggunakan Figma.', image: gambar1, aspectRatio: 635 / 707 },
-  { id: 2, title: 'ReWear', category: 'MOBILE APP', description: 'Konsep aplikasi thrifting mobile dengan fokus pada alur belanja yang sederhana dan nyaman.', image: gambar2, aspectRatio: 364 / 651 },
-  { id: 3, title: 'ReadEase', category: 'MOBILE APP', description: 'Aplikasi booking buku untuk memudahkan pengguna meminjam buku di perpustakaan.', image: gambar3, aspectRatio: 715 / 1600 },
-  { id: 4, title: 'Flappy Bird', category: 'JAVASCRIPT', description: 'Game sederhana berbasis JavaScript dengan tantangan mengatur gerakan dan melewati rintangan.', image: gambar4, aspectRatio: 617 / 650 },
-  { id: 5, title: 'MyQuran', category: 'REACT.JS', description: 'Website Al-Quran berbasis React.js untuk melihat daftar surah dan informasi ayat dengan tampilan yang bersih.', image: gambar5, aspectRatio: 1912 / 895 },
+  { id: 1, title: 'Desain Aplikasi Instagram', category: 'Figma', description: 'Saya mencoba menyusun ulang beberapa layar Instagram di Figma untuk latihan layout dan pemilihan warna.', note: 'Bagian yang paling lama: menyesuaikan jarak antar elemen supaya layar tidak terasa penuh.', image: gambar1, aspectRatio: 635 / 707 },
+  { id: 2, title: 'ReWear', category: 'Aplikasi mobile', description: 'Ide aplikasi thrifting untuk tugas sekolah. Saya membuat alur dari memilih barang sampai melihat detail produk.', note: 'Dari sini saya belajar bahwa alur sederhana lebih enak dipakai daripada terlalu banyak menu.', image: gambar2, aspectRatio: 364 / 651 },
+  { id: 3, title: 'ReadEase', category: 'Aplikasi mobile', description: 'Aplikasi peminjaman buku yang saya buat untuk membayangkan proses booking di perpustakaan.', note: 'Saya masih banyak memperbaiki tampilan daftar buku agar informasinya mudah dicari.', image: gambar3, aspectRatio: 715 / 1600 },
+  { id: 4, title: 'Flappy Bird', category: 'JavaScript', description: 'Game kecil untuk latihan JavaScript. Pemain harus menjaga burung tetap terbang dan melewati pipa.', note: 'Tantangannya ada di gerakan dan benturan, karena sedikit salah hitung game langsung terasa aneh.', image: gambar4, aspectRatio: 617 / 650 },
+  { id: 5, title: 'MyQuran', category: 'React.js', description: 'Website sederhana untuk melihat daftar surah dan informasi ayat menggunakan React.js.', note: 'Proyek ini membantu saya memahami cara membagi tampilan menjadi komponen kecil.', image: gambar5, aspectRatio: 1912 / 895 },
 ];
 
 export default function Home() {
@@ -58,8 +59,8 @@ export default function Home() {
 
       <View style={styles.section}>
         <Text style={styles.cardTitle}>Pengalaman belajar</Text>
-        <View style={styles.timelineItem}><View style={styles.timelineLine} /><View style={styles.timelineContent}><Text style={styles.timelinePeriod}>PROYEK SEKOLAH & PERSONAL</Text><Text style={styles.timelineTitle}>Pengembangan aplikasi dan desain digital</Text><Text style={styles.cardText}>Merancang UI/UX di Figma, membuat aplikasi Android dengan Java/Kotlin, serta membangun proyek interaktif menggunakan JavaScript dan React Native/Expo dan Node.js.</Text></View></View>
-        <View style={styles.timelineItem}><View style={styles.timelineLine} /><View style={styles.timelineContent}><Text style={styles.timelinePeriod}>TARGET PKL</Text><Text style={styles.timelineTitle}>Ruang kolaborasi untuk terus belajar dan berkembang</Text><Text style={styles.cardText}>Siap menerima arahan, bekerja kolaboratif, dan mengembangkan kebiasaan kerja yang teliti selama praktik kerja lapangan.</Text></View></View>
+        <View style={styles.timelineItem}><View style={styles.timelineLine} /><View style={styles.timelineContent}><Text style={styles.timelinePeriod}>YANG SUDAH DICOBA</Text><Text style={styles.timelineTitle}>Membuat tampilan dan aplikasi dari nol</Text><Text style={styles.cardText}>Saya pernah mengerjakan desain di Figma, aplikasi Android dengan Java/Kotlin, dan beberapa latihan web memakai JavaScript, React Native, Expo, serta Node.js.</Text></View></View>
+        <View style={styles.timelineItem}><View style={styles.timelineLine} /><View style={styles.timelineContent}><Text style={styles.timelinePeriod}>BAGIAN YANG MASIH DIPELAJARI</Text><Text style={styles.timelineTitle}>Merapikan kode dan membuat tampilan lebih nyaman</Text><Text style={styles.cardText}>Saya masih belajar membagi pekerjaan menjadi langkah kecil, mencari penyebab error, dan meminta masukan supaya hasilnya tidak hanya terlihat bagus tetapi juga bisa dipakai.</Text></View></View>
       </View>
 
       <View style={styles.section}>
@@ -72,7 +73,7 @@ export default function Home() {
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.projectList}>
           {projects.map((item) => <View key={item.id} style={styles.projectCard}>
             <Image source={item.image} style={[styles.projectImage, { aspectRatio: item.aspectRatio }]} resizeMode="contain" />
-            <View style={styles.projectBody}><Text style={styles.projectCategory}>{item.category}</Text><Text style={styles.projectTitle}>{item.title}</Text><Text style={styles.projectDescription}>{item.description}</Text></View>
+            <View style={styles.projectBody}><Text style={styles.projectCategory}>{item.category}</Text><Text style={styles.projectTitle}>{item.title}</Text><Text style={styles.projectDescription}>{item.description}</Text><Text style={styles.projectNote}>{item.note}</Text></View>
           </View>)}
         </ScrollView>
       </View>
@@ -120,4 +121,5 @@ const styles = StyleSheet.create({
   projectCategory: { color: '#777d85', fontSize: 10, letterSpacing: 1.2, fontWeight: '800', marginBottom: 7 },
   projectTitle: { fontSize: 21, color: '#353a40', fontWeight: '800', marginBottom: 7 },
   projectDescription: { fontSize: 14, color: '#656b72', lineHeight: 21, marginBottom: 15 },
+  projectNote: { fontSize: 13, color: '#777d85', lineHeight: 19, fontStyle: 'italic' },
 });
