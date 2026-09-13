@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Image, ImageSourcePropType, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ImageSourcePropType, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 const gambar1 = require('../../assets/images/proyek1.png');
 const gambar2 = require('../../assets/images/proyek2.png');
@@ -17,8 +16,6 @@ interface Project {
   aspectRatio: number;
 }
 
-type Tab = 'about' | 'experience' | 'skills' | 'portfolio';
-
 const projects: Project[] = [
   { id: 1, title: 'Desain Aplikasi Instagram', category: 'UI/UX DESIGN', description: 'Eksplorasi desain antarmuka dan pengalaman pengguna aplikasi sosial media menggunakan Figma.', image: gambar1, aspectRatio: 635 / 707 },
   { id: 2, title: 'ReWear', category: 'MOBILE APP', description: 'Konsep aplikasi thrifting mobile dengan fokus pada alur belanja yang sederhana dan nyaman.', image: gambar2, aspectRatio: 364 / 651 },
@@ -27,16 +24,7 @@ const projects: Project[] = [
   { id: 5, title: 'MyQuran', category: 'REACT.JS', description: 'Website Al-Quran berbasis React.js untuk melihat daftar surah dan informasi ayat dengan tampilan yang bersih.', image: gambar5, aspectRatio: 1912 / 895 },
 ];
 
-const tabs: { id: Tab; label: string }[] = [
-  { id: 'about', label: 'Profil' },
-  { id: 'experience', label: 'Pengalaman' },
-  { id: 'skills', label: 'Keahlian' },
-  { id: 'portfolio', label: 'Proyek' },
-];
-
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<Tab>('about');
-
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
       <View style={styles.header}>
@@ -53,15 +41,7 @@ export default function Home() {
         <Text style={styles.intro}>Fokus membangun solusi digital yang fungsional dan mudah digunakan.</Text>
       </View>
 
-      <View style={styles.navContainer}>
-        {tabs.map((tab) => (
-          <TouchableOpacity key={tab.id} style={[styles.navButton, activeTab === tab.id && styles.navButtonActive]} onPress={() => setActiveTab(tab.id)} activeOpacity={0.8}>
-            <Text style={[styles.navButtonText, activeTab === tab.id && styles.navButtonTextActive]}>{tab.label}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-
-      {activeTab === 'about' && <View style={styles.card}>
+      <View style={styles.section}>
         <Text style={styles.cardTitle}>Tentang saya</Text>
         <Text style={styles.cardText}>Saya Raisyah Cahya Kirani, pelajar yang memiliki minat pada pengembangan aplikasi mobile dan web, frontend, dan desain UI/UX. Saya senang mengubah ide menjadi tampilan yang terstruktur serta terus belajar melalui proyek nyata.</Text>
         <View style={styles.detailGrid}>
@@ -74,26 +54,26 @@ export default function Home() {
           <Text style={styles.phoneNumber} selectable>+62 882-9157-2296</Text>
           <Text style={styles.copyHint}>Tekan lama nomor untuk menyalin</Text>
         </View>
-      </View>}
+      </View>
 
-      {activeTab === 'experience' && <View style={styles.card}>
+      <View style={styles.section}>
         <Text style={styles.cardTitle}>Pengalaman</Text>
         <View style={styles.timelineItem}><View style={styles.timelineLine} /><View style={styles.timelineContent}><Text style={styles.timelinePeriod}>PROYEK SEKOLAH & PERSONAL</Text><Text style={styles.timelineTitle}>Pengembangan aplikasi dan desain digital</Text><Text style={styles.cardText}>Merancang UI/UX di Figma, membuat aplikasi Android dengan Java/Kotlin, serta membangun proyek interaktif menggunakan JavaScript dan React Native/Expo dan Node.js.</Text></View></View>
         <View style={styles.timelineItem}><View style={styles.timelineLine} /><View style={styles.timelineContent}><Text style={styles.timelinePeriod}>TARGET PKL</Text><Text style={styles.timelineTitle}>Ruang kolaborasi untuk terus belajar dan berkembang</Text><Text style={styles.cardText}>Siap menerima arahan, bekerja kolaboratif, dan mengembangkan kebiasaan kerja yang teliti selama praktik kerja lapangan.</Text></View></View>
-      </View>}
+      </View>
 
-      {activeTab === 'skills' && <View style={styles.card}>
+      <View style={styles.section}>
         <Text style={styles.cardTitle}>Keahlian</Text>
         <View style={styles.skillContainer}>{['UI/UX Design', 'JavaScript', 'React Native', 'Kotlin', 'CSS', 'Git dasar', 'Problem Solving'].map((skill) => <Text key={skill} style={styles.badge}>{skill}</Text>)}</View>
-      </View>}
+      </View>
 
-      {activeTab === 'portfolio' && <View>
+      <View>
         <View style={styles.sectionHeader}><Text style={styles.sectionTitle}>Proyek yang pernah dibuat</Text></View>
         {projects.map((item) => <View key={item.id} style={styles.projectCard}>
           <Image source={item.image} style={[styles.projectImage, { aspectRatio: item.aspectRatio }]} resizeMode="contain" />
           <View style={styles.projectBody}><Text style={styles.projectCategory}>{item.category}</Text><Text style={styles.projectTitle}>{item.title}</Text><Text style={styles.projectDescription}>{item.description}</Text></View>
         </View>)}
-      </View>}
+      </View>
 
     </ScrollView>
   );
@@ -113,12 +93,7 @@ const styles = StyleSheet.create({
   statusDot: { width: 7, height: 7, borderRadius: 4, backgroundColor: '#4dc995' },
   availability: { fontSize: 10, color: '#79d2a5', fontWeight: '700' },
   intro: { color: '#8ba2b8', fontSize: 15, lineHeight: 23, marginTop: 22, maxWidth: 600 },
-  navContainer: { flexDirection: 'row', flexWrap: 'wrap', gap: 4, marginBottom: 32, borderBottomWidth: 1, borderBottomColor: '#1b3854' },
-  navButton: { alignItems: 'center', paddingVertical: 10, paddingHorizontal: 14, borderBottomWidth: 2, borderBottomColor: 'transparent', flexGrow: 1, minWidth: 110 },
-  navButtonActive: { borderBottomColor: '#4ba5e5' },
-  navButtonText: { color: '#8ca3b8', fontWeight: '700', fontSize: 12 },
-  navButtonTextActive: { color: '#e9f5ff' },
-  card: { paddingVertical: 2, marginBottom: 24 },
+  section: { borderTopWidth: 1, borderTopColor: '#1b3854', paddingTop: 22, marginTop: 18, marginBottom: 18 },
   cardTitle: { fontSize: 24, lineHeight: 30, color: '#edf5fc', fontWeight: '800', marginBottom: 14 },
   cardText: { fontSize: 14, color: '#9eb3c7', lineHeight: 23 },
   detailGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 24, borderTopWidth: 1, borderTopColor: '#1b3854', marginTop: 26, paddingTop: 18 },
